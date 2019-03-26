@@ -2,5 +2,48 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="..\lib\hashlib.cpp">
+      <Filter>lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\timelib.cpp">
+      <Filter>lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\logger.cpp">
+      <Filter>lib</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="mandis-p2p">
+      <UniqueIdentifier>{18b93299-09b9-4974-88c0-51247dbea4e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include">
+      <UniqueIdentifier>{d3fdbff2-7f4a-46ac-8325-6e9d738c8446}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="lib">
+      <UniqueIdentifier>{bf94329d-410b-4a6a-8c1f-bc4157f34e97}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="test_lib">
+      <UniqueIdentifier>{c699499e-9751-4c67-b52f-478a7508f93d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\include\hashlib.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="test_hashlib.hpp">
+      <Filter>test_lib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\timelib.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="test_timelib.hpp">
+      <Filter>test_lib</Filter>
+    </ClInclude>
+    <ClInclude Include="test_logger.hpp">
+      <Filter>test_lib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\logger.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
