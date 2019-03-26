@@ -31,6 +31,7 @@ namespace logger {
         if (log_level_ < level)
             return;
         LogField log_field;
+        memset(&log_field, 0, sizeof(log_field));
         log_field.timestamp = time_.GetMicroTimeStamp();
         log_field.level = level;
         strcpy(log_field.logmsg, log);
