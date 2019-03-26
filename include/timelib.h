@@ -10,8 +10,8 @@ namespace timelib {
         Time(const char* timestr_format, int utc=8);
         ~Time() { }
 
-        void MilliSleep(uint64_t msec);
-        void MicroSleep(uint64_t msec);
+        static void MilliSleep(uint64_t msec);
+        static void MicroSleep(uint64_t msec);
 
         uint64_t GetMicroTimeStamp();
         std::string GetMicroTimeStr();
