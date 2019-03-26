@@ -4,8 +4,43 @@
     <Filter Include="mandis-p2p">
       <UniqueIdentifier>{cdc614b1-1c6c-4338-a270-40336bc5ed5b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="include">
+      <UniqueIdentifier>{3fa24836-69fb-497e-83de-e0179a4ec90b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="lib">
+      <UniqueIdentifier>{c709ca54-78da-48ea-b26e-6f0adc8fe9d1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="..\lib\hashlib.cpp">
+      <Filter>lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\ssllib.cpp">
+      <Filter>lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\logger.cpp">
+      <Filter>lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\timelib.cpp">
+      <Filter>lib</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\include\hashlib.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\ssllib.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\logger.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\timelib.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\magic.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
