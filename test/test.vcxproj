@@ -90,15 +90,19 @@ libssl.lib
   <ItemGroup>
     <ClCompile Include="..\lib\hashlib.cpp" />
     <ClCompile Include="..\lib\logger.cpp" />
+    <ClCompile Include="..\lib\ssllib.cpp" />
     <ClCompile Include="..\lib\timelib.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\hashlib.h" />
     <ClInclude Include="..\include\logger.h" />
+    <ClInclude Include="..\include\magic.h" />
+    <ClInclude Include="..\include\ssllib.h" />
     <ClInclude Include="..\include\timelib.h" />
     <ClInclude Include="test_hashlib.hpp" />
     <ClInclude Include="test_logger.hpp" />
+    <ClInclude Include="test_ssllib.hpp" />
     <ClInclude Include="test_timelib.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

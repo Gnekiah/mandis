@@ -11,6 +11,9 @@
     <ClCompile Include="..\lib\logger.cpp">
       <Filter>lib</Filter>
     </ClCompile>
+    <ClCompile Include="..\lib\ssllib.cpp">
+      <Filter>lib</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="mandis-p2p">
@@ -43,6 +46,15 @@
       <Filter>test_lib</Filter>
     </ClInclude>
     <ClInclude Include="..\include\logger.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\ssllib.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="test_ssllib.hpp">
+      <Filter>test_lib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\magic.h">
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>

@@ -17,6 +17,13 @@ namespace hashlib {
 
         static std::string Bytes2Str(const DigestField &bytes);
         static int Str2Bytes(const std::string &str, DigestField &bytes);
+
+        static std::string XorMetric(const std::string &s1, const std::string &s2);
+        static std::string XorMetric(const std::string &s1, const DigestField &s2);
+        static std::string XorMetric(const DigestField &s1, const DigestField &s2);
+        static int XorMetric(const std::string &s1, const std::string &s2, DigestField &s);
+        static int XorMetric(const std::string &s1, const DigestField &s2, DigestField &s);
+        static int XorMetric(const DigestField &s1, const DigestField &s2, DigestField &s);
     };
 
 } // namespace hashlib 

@@ -56,4 +56,46 @@ namespace hashlib {
         }
         return 0;
     }
+
+    std::string Sha1::XorMetric(const std::string &s1, const std::string &s2) {
+        DigestField d1, d2, s;
+        Str2Bytes(s1, d1);
+        Str2Bytes(s2, d2);
+        XorMetric(d1, d2, s);
+        return Bytes2Str(s);
+    }
+
+    std::string Sha1::XorMetric(const std::string &s1, const DigestField &s2) {
+        DigestField d1, s;
+        Str2Bytes(s1, d1);
+        XorMetric(d1, s2, s);
+        return Bytes2Str(s);
+    }
+
+    std::string Sha1::XorMetric(const DigestField &s1, const DigestField &s2) {
+        DigestField s;
+        XorMetric(s1, s2, s);
+        return Bytes2Str(s);
+    }
+
+    int Sha1::XorMetric(const std::string &s1, const std::string &s2, DigestField &s) {
+        DigestField d1, d2;
+        Str2Bytes(s1, d1);
+        Str2Bytes(s2, d2);
+        return XorMetric(d1, d2, s);
+
+    }
+
+    int Sha1::XorMetric(const std::string &s1, const DigestField &s2, DigestField &s) {
+        DigestField d1;
+        Str2Bytes(s1, d1);
+        return XorMetric(d1, s2, s);
+    }
+
+    int Sha1::XorMetric(const DigestField &s1, const DigestField &s2, DigestField &s) {
+        for (int i = 0; i < 5; i++) {
+            s[i] = s1[i] ^ s2[i];
+        }
+        return 0;
+    }
 }
