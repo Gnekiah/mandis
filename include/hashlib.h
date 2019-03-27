@@ -5,21 +5,18 @@
 #include <string>
 
 namespace hashlib {
+
+    typedef uint32_t DigestField[5];
+        
     class Sha1 {
     public:
-        Sha1(const char *msg, size_t len);
-        Sha1(const std::string &str);
-        ~Sha1() { }
-
-        const uint32_t* sha1() const { return sha1_; }
-        const uint8_t* sha1_str() const { return sha1_str_; }
-
         static std::string GetSha1(const char *msg, size_t len);
         static std::string GetSha1(const std::string &str);
+        static int GetSha1(const char *msg, size_t len, DigestField &bytes);
+        static int GetSha1(const std::string &str, DigestField &bytes);
 
-    private:
-        uint32_t sha1_[5];
-        uint8_t sha1_str_[41];
+        static std::string Bytes2Str(const DigestField &bytes);
+        static int Str2Bytes(const std::string &str, DigestField &bytes);
     };
 
 } // namespace hashlib 
