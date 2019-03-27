@@ -20,6 +20,7 @@ TEST(test_hashlib, case_1) {
     ASSERT_FALSE(TestSha1Case2(msg.c_str(), msg.length()));
 }
 
+///hashlib - XorMatric  accepted - 2019/03/27 16:28:00
 TEST(test_hashlib, case_2) {
     std::string str1 = "b69e597b4e56e93b6c633767d159cb192f5a5dae";
     std::string str2 = "b69e597b4e56e92b6c633767d159cb192f5a5daf";

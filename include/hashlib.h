@@ -6,7 +6,9 @@
 
 namespace hashlib {
 
-    typedef uint32_t DigestField[5];
+    typedef struct DigestField {
+        uint32_t digest[5];
+    } DigestField;
         
     class Sha1 {
     public:

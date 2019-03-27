@@ -18,7 +18,7 @@ const bool TestSha1Case2(const char* msg, int len) {
 
     hashlib::Sha1::Str2Bytes(hashval, digest1);
     for (int i = 0; i < 5; i++) {
-        if (digest1[i] != digest2[i])
+        if (digest1.digest[i] != digest2.digest[i])
             return 1;
     }
     return 0;

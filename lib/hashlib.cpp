@@ -29,7 +29,7 @@ namespace hashlib {
     std::string Sha1::Bytes2Str(const DigestField &bytes) {
         std::stringstream convertor;
         for (int i = 0; i < 5; i++)
-            convertor << std::hex << std::setw(8) << std::setfill('0') << bytes[i];
+            convertor << std::hex << std::setw(8) << std::setfill('0') << bytes.digest[i];
         return convertor.str();
     }
 
@@ -37,7 +37,7 @@ namespace hashlib {
         boost::uuids::detail::sha1 s;
         std::stringstream convertor;
         s.process_bytes(msg, len);
-        s.get_digest(bytes);
+        s.get_digest(bytes.digest);
         return 0;
     }
 
@@ -52,7 +52,7 @@ namespace hashlib {
             convertor.clear();
             convertor << str.substr(i * 8, 8);
             std::string tmp;
-            convertor >> bytes[i];
+            convertor >> bytes.digest[i];
         }
         return 0;
     }
@@ -94,7 +94,7 @@ namespace hashlib {
 
     int Sha1::XorMetric(const DigestField &s1, const DigestField &s2, DigestField &s) {
         for (int i = 0; i < 5; i++) {
-            s[i] = s1[i] ^ s2[i];
+            s.digest[i] = s1.digest[i] ^ s2.digest[i];
         }
         return 0;
     }
