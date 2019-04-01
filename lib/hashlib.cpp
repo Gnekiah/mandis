@@ -26,6 +26,14 @@ namespace hashlib {
         return GetSha1(str.c_str(), str.length());
     }
 
+    int Sha1::IsEqual(const DigestField &d1, const DigestField &d2) {
+        for (int i = 0; i < 5; i++) {
+            if (d1.digest[i] != d2.digest[i])
+                return 0;
+        }
+        return 1;
+    }
+
     std::string Sha1::Bytes2Str(const DigestField &bytes) {
         std::stringstream convertor;
         for (int i = 0; i < 5; i++)

@@ -17,6 +17,8 @@ namespace hashlib {
         static int GetSha1(const char *msg, size_t len, DigestField &bytes);
         static int GetSha1(const std::string &str, DigestField &bytes);
 
+        static int IsEqual(const DigestField &d1, const DigestField &d2);
+
         static std::string Bytes2Str(const DigestField &bytes);
         static int Str2Bytes(const std::string &str, DigestField &bytes);
 

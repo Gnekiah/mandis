@@ -50,4 +50,14 @@ const int TestSha1Case3(const std::string &msg1, const std::string &msg2, std::s
     return ret;
 }
 
+// test IsEqual
+const int TestSha1Case4(const std::string &msg1, const std::string &msg2) {
+    int ret = 0;
+    hashlib::DigestField d1, d2;
+    hashlib::Sha1::GetSha1(msg1, d1);
+    hashlib::Sha1::GetSha1(msg2, d2);
+    return hashlib::Sha1::IsEqual(d1, d2);
+}
+
+
 #endif // !MANDIS_TEST_HASHLIB_HPP_
