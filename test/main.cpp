@@ -30,6 +30,15 @@ TEST(test_hashlib, case_2) {
     ASSERT_STREQ(res.c_str(), ref.c_str());
 }
 
+///hashlib - IsEqual    accepted - 2019/04/01 15:05:00
+TEST(test_hashlib, case_3) {
+    std::string str1 = "hello";
+    std::string str2 = "hello";
+    std::string str3 = "world";
+    ASSERT_EQ(TestSha1Case4(str1, str2), 1);
+    ASSERT_EQ(TestSha1Case4(str1, str3), 0);
+}
+
 ///timelib              accepted - 2019/03/25 14:57:00
 TEST(test_timelib, case_1) {
     ASSERT_GT(TestTimeCase1(), 500000);
