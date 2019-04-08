@@ -5,6 +5,7 @@
 #include <boost/shared_ptr.hpp>
 #include <boost/function.hpp>
 #include <boost/noncopyable.hpp>
+#include <boost/thread.hpp>
 
 #include "../include/logger.h"
 #include "session.h"
@@ -22,8 +23,10 @@ namespace p2pnet {
         void SetStoreCallback(callback_fn cfn) { rsp_store_callback_ = cfn; }
         void SetSyncCallback(callback_fn cfn) { rsp_sync_callback_ = cfn; }
 
+        void StartServer();
         /* Initiate an asynchronous accept operation. */
         void Start();
+        void Join();
         /* Stop the server. */
         void Stop();
 
@@ -42,6 +45,7 @@ namespace p2pnet {
         callback_fn rsp_find_callback_;
         callback_fn rsp_store_callback_;
         callback_fn rsp_sync_callback_;
+        boost::thread thrd_;
     };
 
 }

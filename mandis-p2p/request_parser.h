@@ -13,17 +13,17 @@ namespace p2pnet {
 
         void Reset();
 
-        int Parse(Request& req, char* buff, int offset) {
+        int Parse(Request& req, char* buff, size_t offset) {
             return 1;
         }
 
-    private:
+    private:/*
         boost::tribool Consume(Request &req, char input);
         static bool IsChar(int c);
         static bool IsCtrl(int c);
         static bool IsTspecial(int c);
         static bool IsDigit(int c);
-         
+         */
         enum state {
 
         } state_;

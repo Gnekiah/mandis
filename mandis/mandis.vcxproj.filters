@@ -49,9 +49,6 @@
     <ClCompile Include="..\mandis-p2p\request_parser.cpp">
       <Filter>mandis-p2p</Filter>
     </ClCompile>
-    <ClCompile Include="..\mandis-p2p\reply.cpp">
-      <Filter>mandis-p2p</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\hashlib.h">
@@ -91,9 +88,6 @@
       <Filter>mandis-p2p</Filter>
     </ClInclude>
     <ClInclude Include="..\mandis-p2p\request.hpp">
-      <Filter>mandis-p2p</Filter>
-    </ClInclude>
-    <ClInclude Include="..\mandis-p2p\reply.h">
       <Filter>mandis-p2p</Filter>
     </ClInclude>
   </ItemGroup>

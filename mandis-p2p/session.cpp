@@ -29,7 +29,7 @@ namespace p2pnet {
 
     void Session::HandleRead(const boost::system::error_code &ec, std::size_t bytes_transferred) {
         if (ec) {
-            LOG_WARNING(logger_, ec.message);
+            LOG_WARNING(logger_, ec.message());
             return;
         }
         int ret = request_parser_.Parse(request_, buffer_.data(), bytes_transferred);
@@ -51,7 +51,7 @@ namespace p2pnet {
 
     void Session::HandleWrite(const boost::system::error_code &ec) {
         if (ec) {
-            LOG_WARNING(logger_, ec.message);
+            LOG_WARNING(logger_, ec.message());
             return;
         }
         ///TODO: handle write

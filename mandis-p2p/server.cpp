@@ -15,12 +15,26 @@ namespace p2pnet {
 
     }
     
+    void Server::StartServer() {
+        boost::system::error_code ec;
+        ios_.run(ec);
+        LOG_DEBUG(logger_, ec.message());
+    }
+
     void Server::Start() {
-        ios_.run();
+        LOG_TRACE(logger_, "Server Start!");
+        thrd_ = boost::thread(boost::bind(&Server::StartServer, this));
+    }
+
+    void Server::Join() {
+        LOG_TRACE(logger_, "Server Join!");
+        thrd_.join();
     }
 
     void Server::Stop() {
         ios_.stop();
+        LOG_TRACE(logger_, "Server Stop!");
+        thrd_.interrupt();
     }
 
     void Server::Run() {
@@ -33,7 +47,7 @@ namespace p2pnet {
     
     void Server::HandleAccept(session_ptr session, const boost::system::error_code& ec) {
         if (ec || !session) {
-            LOG_WARNING(logger_, ec.message);
+            LOG_WARNING(logger_, ec.message());
             return;
         }
         session->Start();

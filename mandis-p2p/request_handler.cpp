@@ -6,4 +6,8 @@ namespace p2pnet {
 
     }
 
+    void RequestHandler::HandleRequest(const request &req, reply& rep) {
+
+    }
+
 }
