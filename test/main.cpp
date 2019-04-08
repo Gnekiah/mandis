@@ -7,6 +7,7 @@
 #include "test_timelib.hpp"
 #include "test_logger.hpp"
 #include "test_ssllib.hpp"
+#include "test_socket_server.hpp"
 
 logger::Logger *logger_ = nullptr;
 
@@ -64,6 +65,9 @@ TEST(test_ssllib, case_1) {
     ASSERT_STREQ(TestRsaPairCase5(logger_, msg).c_str(), msg.c_str());
 }
 
+TEST(test_socket_server, case_1) {
+    ASSERT_EQ(TestSocketServerCase1(logger_), 0);
+}
 
 
 int main(int argc, char **argv) {
