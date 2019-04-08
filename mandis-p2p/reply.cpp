@@ -1,3 +1,0 @@
-namespace p2pnet {
-
-}

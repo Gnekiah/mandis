@@ -91,14 +91,35 @@ libssl.lib
     <ClCompile Include="..\lib\logger.cpp" />
     <ClCompile Include="..\lib\ssllib.cpp" />
     <ClCompile Include="..\lib\timelib.cpp" />
+    <ClCompile Include="..\mandis-p2p\connector.cpp" />
+    <ClCompile Include="..\mandis-p2p\kadbucket.cpp" />
+    <ClCompile Include="..\mandis-p2p\p2pnet.cpp" />
+    <ClCompile Include="..\mandis-p2p\reply.cpp" />
+    <ClCompile Include="..\mandis-p2p\request_handler.cpp" />
+    <ClCompile Include="..\mandis-p2p\request_parser.cpp" />
+    <ClCompile Include="..\mandis-p2p\server.cpp" />
+    <ClCompile Include="..\mandis-p2p\session.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\hashlib.h" />
     <ClInclude Include="..\include\logger.h" />
     <ClInclude Include="..\include\magic.h" />
+    <ClInclude Include="..\include\p2pnet.h" />
     <ClInclude Include="..\include\ssllib.h" />
     <ClInclude Include="..\include\timelib.h" />
+    <ClInclude Include="..\mandis-p2p\connector.h" />
+    <ClInclude Include="..\mandis-p2p\kadbucket.h" />
+    <ClInclude Include="..\mandis-p2p\reply.h" />
+    <ClInclude Include="..\mandis-p2p\request.hpp" />
+    <ClInclude Include="..\mandis-p2p\request_handler.h" />
+    <ClInclude Include="..\mandis-p2p\request_parser.h" />
+    <ClInclude Include="..\mandis-p2p\server.h" />
+    <ClInclude Include="..\mandis-p2p\session.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Makefile" />
+    <None Include="..\README.md" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

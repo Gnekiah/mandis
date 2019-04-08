@@ -10,6 +10,9 @@
     <Filter Include="lib">
       <UniqueIdentifier>{c709ca54-78da-48ea-b26e-6f0adc8fe9d1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="doc">
+      <UniqueIdentifier>{c126b9a0-379c-49cd-b5e4-82a1bd1f27f1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -24,6 +27,30 @@
     </ClCompile>
     <ClCompile Include="..\lib\timelib.cpp">
       <Filter>lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mandis-p2p\kadbucket.cpp">
+      <Filter>mandis-p2p</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mandis-p2p\p2pnet.cpp">
+      <Filter>mandis-p2p</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mandis-p2p\connector.cpp">
+      <Filter>mandis-p2p</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mandis-p2p\session.cpp">
+      <Filter>mandis-p2p</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mandis-p2p\server.cpp">
+      <Filter>mandis-p2p</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mandis-p2p\request_handler.cpp">
+      <Filter>mandis-p2p</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mandis-p2p\request_parser.cpp">
+      <Filter>mandis-p2p</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mandis-p2p\reply.cpp">
+      <Filter>mandis-p2p</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -42,5 +69,36 @@
     <ClInclude Include="..\include\magic.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="..\mandis-p2p\kadbucket.h">
+      <Filter>mandis-p2p</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\p2pnet.h">
+      <Filter>lib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mandis-p2p\connector.h">
+      <Filter>mandis-p2p</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mandis-p2p\session.h">
+      <Filter>mandis-p2p</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mandis-p2p\server.h">
+      <Filter>mandis-p2p</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mandis-p2p\request_handler.h">
+      <Filter>mandis-p2p</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mandis-p2p\request_parser.h">
+      <Filter>mandis-p2p</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mandis-p2p\request.hpp">
+      <Filter>mandis-p2p</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mandis-p2p\reply.h">
+      <Filter>mandis-p2p</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Makefile" />
+    <None Include="..\README.md" />
   </ItemGroup>
 </Project>
