@@ -22,15 +22,21 @@ namespace p2pnet {
         void SetStoreCallback(callback_fn cfn) { rsp_store_callback_ = cfn; }
         void SetSyncCallback(callback_fn cfn) { rsp_sync_callback_ = cfn; }
 
+        /* Initiate an asynchronous accept operation. */
         void Start();
+        /* Stop the server. */
         void Stop();
 
     private:
+        /* Run the server's io_context loop. */
         void Run();
+        /* Handle completion of an asynchronous accept operation. */
         void HandleAccept(session_ptr session, const boost::system::error_code& ec);
 
     private:
+        /* The io_service used to perform asynchronous operations. */
         boost::asio::io_service ios_;
+        /* Acceptor used to listen for incoming connections. */
         boost::asio::ip::tcp::acceptor acceptor_;
         logger::Logger * logger_ = nullptr;
         callback_fn rsp_find_callback_;
