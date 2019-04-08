@@ -4,43 +4,39 @@
 
 namespace p2pnet {    
 
-    Server::Server(boost::asio::io_service& ios, logger::Logger *logger, int port)
-        : ios_(ios),
-        logger_(logger),
-        acceptor_(ios, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), port))
+    Server::Server(logger::Logger *logger, int port)
+        : logger_(logger),
+        acceptor_(ios_, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), port))
     {
-        Start();
+        Run();
     }
 
     Server::~Server() {
 
     }
     
-    void Server::Run() {
-        ios_.run();
-    }
-
     void Server::Start() {
-        session_ptr session(new Session(ios_));
-        acceptor_.async_accept(session->socket(), boost::bind(&Relay::AcceptHandler, 
-            this, session, boost::asio::placeholders::error));
+        ios_.run();
     }
 
     void Server::Stop() {
         ios_.stop();
     }
 
-    void Server::AcceptHandler(session_ptr session, const boost::system::error_code& ec) {
+    void Server::Run() {
+        session_ptr session(new Session(ios_, rsp_find_callback_, rsp_store_callback_,
+            rsp_sync_callback_));
+        acceptor_.async_accept(session->socket(), boost::bind(&Server::HandleAccept, 
+            this, session, boost::asio::placeholders::error));
+    }
+
+    
+    void Server::HandleAccept(session_ptr session, const boost::system::error_code& ec) {
         if (ec || !session) {
             LOG_WARNING(logger_, ec.message);
             return;
         }
         session->Start();
-        Start();
+        Run();
     }
-
-    void Server::CallbackSession(const boost::system::error_code& ec) {
-
-    }
-
 }

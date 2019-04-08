@@ -3,34 +3,39 @@
 
 #include <boost/asio.hpp>
 #include <boost/shared_ptr.hpp>
+#include <boost/function.hpp>
 #include <boost/noncopyable.hpp>
 
 #include "../include/logger.h"
 #include "session.h"
-#include "request_handler.h"
 
 namespace p2pnet {
-    typedef boost::shared_ptr<Session> session_ptr;
+    typedef boost::shared_ptr<Session> session_ptr; 
 
     class Server : private boost::noncopyable
     {
     public:
-        explicit Server(logger::Logger *logger, int port, size_t thread_pool_size);
+        explicit Server(logger::Logger *logger, int port);
         virtual ~Server();
 
-        void Run();
+        void SetFindCallback(callback_fn cfn) { rsp_find_callback_ = cfn; }
+        void SetStoreCallback(callback_fn cfn) { rsp_store_callback_ = cfn; }
+        void SetSyncCallback(callback_fn cfn) { rsp_sync_callback_ = cfn; }
+
         void Start();
-        void Join();
         void Stop();
 
     private:
+        void Run();
         void HandleAccept(session_ptr session, const boost::system::error_code& ec);
-        void CallbackSession(const boost::system::error_code& ec);
 
     private:
-        boost::asio::io_service& ios_;
+        boost::asio::io_service ios_;
         boost::asio::ip::tcp::acceptor acceptor_;
         logger::Logger * logger_ = nullptr;
+        callback_fn rsp_find_callback_;
+        callback_fn rsp_store_callback_;
+        callback_fn rsp_sync_callback_;
     };
 
 }
