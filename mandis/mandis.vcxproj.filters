@@ -13,7 +13,10 @@
     <Filter Include="doc">
       <UniqueIdentifier>{c126b9a0-379c-49cd-b5e4-82a1bd1f27f1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="mandis-p2p\socket">
+    <Filter Include="mandis-p2p\udpsocket">
+      <UniqueIdentifier>{4d1b7f8c-ab26-40c1-b669-b9d82f6c6e67}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="mandis-p2p\tcpsocket">
       <UniqueIdentifier>{54c7f53a-1792-4dd8-98aa-1ec6a584b3d3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -38,19 +41,25 @@
       <Filter>mandis-p2p</Filter>
     </ClCompile>
     <ClCompile Include="..\mandis-p2p\connector.cpp">
-      <Filter>mandis-p2p\socket</Filter>
+      <Filter>mandis-p2p\tcpsocket</Filter>
     </ClCompile>
     <ClCompile Include="..\mandis-p2p\request_handler.cpp">
-      <Filter>mandis-p2p\socket</Filter>
+      <Filter>mandis-p2p\tcpsocket</Filter>
     </ClCompile>
     <ClCompile Include="..\mandis-p2p\request_parser.cpp">
-      <Filter>mandis-p2p\socket</Filter>
+      <Filter>mandis-p2p\tcpsocket</Filter>
     </ClCompile>
     <ClCompile Include="..\mandis-p2p\server.cpp">
-      <Filter>mandis-p2p\socket</Filter>
+      <Filter>mandis-p2p\tcpsocket</Filter>
     </ClCompile>
     <ClCompile Include="..\mandis-p2p\session.cpp">
-      <Filter>mandis-p2p\socket</Filter>
+      <Filter>mandis-p2p\tcpsocket</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mandis-p2p\udpserver.cpp">
+      <Filter>mandis-p2p\udpsocket</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mandis-p2p\udpclient.cpp">
+      <Filter>mandis-p2p\udpsocket</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -76,22 +85,28 @@
       <Filter>lib</Filter>
     </ClInclude>
     <ClInclude Include="..\mandis-p2p\connector.h">
-      <Filter>mandis-p2p\socket</Filter>
+      <Filter>mandis-p2p\tcpsocket</Filter>
     </ClInclude>
     <ClInclude Include="..\mandis-p2p\request.hpp">
-      <Filter>mandis-p2p\socket</Filter>
+      <Filter>mandis-p2p\tcpsocket</Filter>
     </ClInclude>
     <ClInclude Include="..\mandis-p2p\request_handler.h">
-      <Filter>mandis-p2p\socket</Filter>
+      <Filter>mandis-p2p\tcpsocket</Filter>
     </ClInclude>
     <ClInclude Include="..\mandis-p2p\request_parser.h">
-      <Filter>mandis-p2p\socket</Filter>
+      <Filter>mandis-p2p\tcpsocket</Filter>
     </ClInclude>
     <ClInclude Include="..\mandis-p2p\server.h">
-      <Filter>mandis-p2p\socket</Filter>
+      <Filter>mandis-p2p\tcpsocket</Filter>
     </ClInclude>
     <ClInclude Include="..\mandis-p2p\session.h">
-      <Filter>mandis-p2p\socket</Filter>
+      <Filter>mandis-p2p\tcpsocket</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mandis-p2p\udpclient.h">
+      <Filter>mandis-p2p\udpsocket</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mandis-p2p\udpserver.h">
+      <Filter>mandis-p2p\udpsocket</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

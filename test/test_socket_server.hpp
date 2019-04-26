@@ -14,6 +14,7 @@ const int TestSocketServerCase1(logger::Logger *log) {
     boost::asio::io_context ioc;
     p2pnet::Connector connector(ioc, "127.0.0.1", 12345, log);
 
+    timelib::Time::MilliSleep(10000);
 
     server.Stop();
     server.Join();
