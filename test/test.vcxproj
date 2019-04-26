@@ -92,6 +92,7 @@ libssl.lib
     <ClCompile Include="..\lib\logger.cpp" />
     <ClCompile Include="..\lib\ssllib.cpp" />
     <ClCompile Include="..\lib\timelib.cpp" />
+    <ClCompile Include="..\mandis-p2p\connector.cpp" />
     <ClCompile Include="..\mandis-p2p\request_handler.cpp" />
     <ClCompile Include="..\mandis-p2p\request_parser.cpp" />
     <ClCompile Include="..\mandis-p2p\server.cpp" />
@@ -104,6 +105,7 @@ libssl.lib
     <ClInclude Include="..\include\magic.h" />
     <ClInclude Include="..\include\ssllib.h" />
     <ClInclude Include="..\include\timelib.h" />
+    <ClInclude Include="..\mandis-p2p\connector.h" />
     <ClInclude Include="..\mandis-p2p\request.hpp" />
     <ClInclude Include="..\mandis-p2p\request_handler.h" />
     <ClInclude Include="..\mandis-p2p\request_parser.h" />

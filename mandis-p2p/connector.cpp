@@ -3,8 +3,10 @@
 #include <ostream>
 
 namespace p2pnet {
-    Connector::Connector(const std::string &ip, int port, logger::Logger *log) {
-        socket_ = boost::asio::ip::tcp::socket(ioc_);
+    Connector::Connector(boost::asio::io_context& ioc, const std::string &ip, int port, 
+        logger::Logger *log) 
+        : socket_(ioc)
+    {
         boost::asio::ip::tcp::endpoint ep(boost::asio::ip::address::from_string(ip), port);
         socket_.async_connect(ep, boost::bind(&Connector::HandleConnect, this,
             boost::asio::placeholders::error));
@@ -15,8 +17,11 @@ namespace p2pnet {
     }
 
     void Connector::HandleConnect(const boost::system::error_code& ec) {
-
-
+        if (ec) {
+            LOG_WARNING(logger_, ec.message());
+            return;
+        }
+        LOG_TRACE(logger_, "trace HandleConnect");
     }
 
     void Connector::ReqPing() {

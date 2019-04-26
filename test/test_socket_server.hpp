@@ -4,12 +4,16 @@
 #include "../include/logger.h"
 #include "../include/timelib.h"
 #include "../mandis-p2p/server.h"
+#include "../mandis-p2p/connector.h"
 
 const int TestSocketServerCase1(logger::Logger *log) {
     p2pnet::Server server(log, 12345);
     server.Start();
 
     ///TODO: connect to server and send message
+    boost::asio::io_context ioc;
+    p2pnet::Connector connector(ioc, "127.0.0.1", 12345, log);
+
 
     server.Stop();
     server.Join();

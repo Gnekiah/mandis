@@ -10,7 +10,7 @@
 namespace p2pnet {
     class Connector {
     public:
-        Connector(const std::string &ip, int port, logger::Logger *log);
+        Connector(boost::asio::io_context& ioc, const std::string &ip, int port, logger::Logger *log);
         ~Connector();
 
         void ReqPing();
