@@ -81,9 +81,6 @@
     <ClInclude Include="..\mandis-p2p\kadbucket.h">
       <Filter>mandis-p2p</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\p2pnet.h">
-      <Filter>lib</Filter>
-    </ClInclude>
     <ClInclude Include="..\mandis-p2p\connector.h">
       <Filter>mandis-p2p\tcpsocket</Filter>
     </ClInclude>
@@ -107,6 +104,9 @@
     </ClInclude>
     <ClInclude Include="..\mandis-p2p\udpserver.h">
       <Filter>mandis-p2p\udpsocket</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\p2pnet.h">
+      <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

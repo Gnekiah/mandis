@@ -3,7 +3,13 @@
 
 namespace p2pnet {
 
+    class UdpServer {
+    public:
 
+
+    private:
+
+    };
 
 }
 

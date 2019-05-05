@@ -13,7 +13,6 @@ namespace p2pnet {
         UdpClient(boost::asio::io_context &ioc, std::string &ip, int port, logger::Logger *logger);
 
     private:
-        boost::asio::io_context ioc_;
         boost::asio::ip::udp::socket socket_;
         logger::Logger *logger_;
     };
