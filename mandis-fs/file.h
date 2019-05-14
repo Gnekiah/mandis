@@ -8,17 +8,18 @@ namespace foofs {
 
     class File {
     public:
-        File();
+        File(std::string file_name, std::string description, std::string hash_key);
         ~File();
+
+        const std::string& file_name() { return file_name_; }
+        const std::string& description() { return description_; }
+        const std::string& hash_key() { return hash_key_; }
 
     private:
         std::string file_name_;
         std::string description_;
         /* hash value of current file */
         std::string hash_key_;
-        /* hash list: blocks set of current file */
-        std::vector<std::string> hash_list_;    
-        
     };
 }
 
