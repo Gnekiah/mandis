@@ -20,6 +20,8 @@ namespace foofs {
         int buffer_size_;
         /* block attrs */
         int block_flag_;
+        /* counter of block, if cnter=0, then delete the block */
+        int block_cnter_;
     };
 
 }
