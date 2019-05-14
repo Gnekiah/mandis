@@ -3,6 +3,7 @@
 
 #include <map>
 
+#include "../include/config.h"
 #include "../include/ssllib.h"
 #include "../include/hashlib.h"
 #include "../include/logger.h"
@@ -12,7 +13,7 @@ namespace p2pnet {
     
     class P2Pnet {
     public:
-        P2Pnet();
+        P2Pnet(config::Config *config, logger::Logger *logger);
         ~P2Pnet();
 
     private:
@@ -20,7 +21,7 @@ namespace p2pnet {
         hashlib::DigestField id_;
         std::map<int, KadBucket*> * bucket_ = nullptr;
         logger::Logger *logger_ = nullptr;
-
+        config::Config *config_ = nullptr;
     };
 }
 
