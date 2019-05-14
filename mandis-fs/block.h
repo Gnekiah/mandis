@@ -7,13 +7,19 @@ namespace foofs {
 
     class Block {
     public:
-        Block();
+        Block(std::string hash_key, int buffer_size, int block_flag);
         ~Block();
+
+        const std::string& hash_key() { return hash_key_; }
+        const int buffer_size() { return buffer_size_; }
+        const int block_flag() { return block_flag_; }
 
     private:
         std::string hash_key_;
+        /* block size */
         int buffer_size_;
-        unsigned char buffer_[1024 * 256];
+        /* block attrs */
+        int block_flag_;
     };
 
 }
