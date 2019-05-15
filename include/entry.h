@@ -12,6 +12,11 @@ namespace frontend {
         Entry(config::Config *config, foofs::FooFS *foofs, logger::Logger *logger);
         ~Entry();
 
+        void Run();
+        void Start();
+        void Stop();
+        void Join();
+
     private:
         config::Config *config_ = nullptr;
         foofs::FooFS *foofs_ = nullptr;
