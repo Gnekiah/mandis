@@ -13,16 +13,17 @@ int main(int argc, char **argv)
 
     logger::Logger *logger = new logger::Logger(config->logging_filepath());
     logger->Start();
-
     p2pnet::P2Pnet *p2pnet = new p2pnet::P2Pnet(config, logger);
+    p2pnet->Start();
     foofs::FooFS *foofs = new foofs::FooFS(config, p2pnet, logger);
+    foofs->Start();
     frontend::Entry *entry = new frontend::Entry(config, foofs, logger);
-    
-    // entry->Join();
-    // foofs->Join();
-    // p2pnet->Join();
-    logger->Join();
+    entry->Start();
 
+    entry->Join();
+    foofs->Join();
+    p2pnet->Join();
+    logger->Join();
     return 0;
 }
  

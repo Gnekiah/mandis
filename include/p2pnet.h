@@ -16,6 +16,11 @@ namespace p2pnet {
         P2Pnet(config::Config *config, logger::Logger *logger);
         ~P2Pnet();
 
+        void Run();
+        void Start();
+        void Stop();
+        void Join();
+
     private:
         ssllib::RsaPair key_;
         hashlib::DigestField id_;
