@@ -17,10 +17,16 @@ namespace foofs {
         FooFS(config::Config *config, p2pnet::P2Pnet *p2pnet, logger::Logger *logger);
         ~FooFS();
 
-        void Write();
-        void Read();
+        void Write(std::string &filepath);
+        void ReadByName(std::string &filename);
+        void ReadByHash(std::string &filehash);
         void Delete();
         void ReadMetaData();
+
+        void Run();
+        void Start();
+        void Stop();
+        void Join();
 
     private:
         std::map<std::string, File*> name_to_file_;
@@ -30,6 +36,10 @@ namespace foofs {
 
         std::vector<File*> file_vec_;
         std::vector<Block*> block_vec_;
+
+        config::Config *config_ = nullptr;
+        p2pnet::P2Pnet *p2pnet_ = nullptr;
+        logger::Logger *logger_ = nullptr;
     };
 }
 
