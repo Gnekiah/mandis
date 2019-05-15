@@ -27,6 +27,11 @@ namespace config {
 
         p2pnet_port_ = pt_.get<unsigned short>("MandisP2P.Port", 60002);
         p2pnet_filepath_ = pt_.get<std::string>("MandisP2P.NetInfoPath", "");
+        rsa_key_length_ = pt_.get<int>("MandisP2P.RSAKeyLength", 2048);
+        rsa_password_ = pt_.get<std::string>("MandisP2P.RSAPassword", "");
+        rsa_public_key_path_ = pt_.get<std::string>("MandisP2P.RSAPublicKeyPath", "");
+        rsa_private_key_path_ = pt_.get<std::string>("MandisP2P.RSAPrivateKeyPath", "");
+
     }
 
     Config::~Config() {
@@ -45,6 +50,10 @@ namespace config {
 
         pt_.put<std::string>("MandisP2P.Port", "60002");
         pt_.put<std::string>("MandisP2P.NetInfoPath", "");
+        pt_.put<std::string>("MandisP2P.RSAKeyLength", "");
+        pt_.put<std::string>("MandisP2P.RSAPassword", "");
+        pt_.put<std::string>("MandisP2P.RSAPublicKeyPath", "");
+        pt_.put<std::string>("MandisP2P.RSAPrivateKeyPath", "");
     }
 
 }

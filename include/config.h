@@ -25,6 +25,10 @@ namespace config {
         /* p2pnet */
         const unsigned short p2pnet_port() { return p2pnet_port_; }
         const std::string& p2pnet_filepath() { return p2pnet_filepath_; }
+        const int rsa_key_length() { return rsa_key_length_; }
+        const std::string& rsa_password() { return rsa_password_; }
+        const std::string& rsa_public_key_path() { return rsa_public_key_path_; }
+        const std::string& rsa_private_key_path() { return rsa_private_key_path_; }
         
     private:
         void GenConfig();
@@ -55,6 +59,10 @@ namespace config {
         unsigned short p2pnet_port_;
         /* p2pnet config file path */
         std::string p2pnet_filepath_;
+        int rsa_key_length_;
+        std::string rsa_password_;
+        std::string rsa_public_key_path_;
+        std::string rsa_private_key_path_;
 
     };
 }
