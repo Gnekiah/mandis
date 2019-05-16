@@ -17,26 +17,31 @@ namespace foofs {
         FooFS(config::Config *config, p2pnet::P2Pnet *p2pnet, logger::Logger *logger);
         ~FooFS();
 
-        void Write(std::string &filepath);
-        void ReadByName(std::string &filename);
-        void ReadByHash(std::string &filehash);
-        void Delete();
-        void ReadMetaData();
+        int Write(std::string &filepath);
+        int ReadByName(std::string &file_name, std::string &dest_path);
+        int ReadByHash(std::string &filehash);
+        int Delete();
+        int ReadMetaData();
 
         void Run();
         void Start();
         void Stop();
         void Join();
+        
+    private:
+        int Split(std::vector<std::string> &vec, const std::string &str, const char pattern);
+        int Str2Int(std::string &str);
 
     private:
-        std::map<std::string, File*> name_to_file_;
-        std::map<std::string, File*> hash_to_file_;
         std::map<std::string, Block*> hash_to_block_;
         std::set<std::string> block_set_;
-
-        std::vector<File*> file_vec_;
         std::vector<Block*> block_vec_;
 
+        std::map<std::string, File*> name_to_file_;
+        std::map<std::string, File*> hash_to_file_;
+        std::set<std::string> file_set_;    /* not used, assume not repeating file */
+        std::vector<File*> file_vec_;
+        
         config::Config *config_ = nullptr;
         p2pnet::P2Pnet *p2pnet_ = nullptr;
         logger::Logger *logger_ = nullptr;
