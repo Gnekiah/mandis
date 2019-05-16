@@ -14,6 +14,9 @@ namespace foofs {
         const int buffer_size() { return buffer_size_; }
         const int block_flag() { return block_flag_; }
 
+    public:
+        const static int NR_ATTRIBUTE = 3;
+
     private:
         std::string hash_key_;
         /* block size */
@@ -21,7 +24,7 @@ namespace foofs {
         /* block attrs */
         int block_flag_;
         /* counter of block, if cnter=0, then delete the block */
-        int block_cnter_;
+        int block_cnter_;   /* not used */
     };
 
 }

@@ -24,6 +24,12 @@ int main(int argc, char **argv)
     foofs->Join();
     p2pnet->Join();
     logger->Join();
+
+    delete entry;
+    delete foofs;
+    delete p2pnet;
+    delete logger;
+
     return 0;
 }
  

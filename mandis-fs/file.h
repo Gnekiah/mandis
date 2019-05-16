@@ -15,6 +15,9 @@ namespace foofs {
         const std::string& description() { return description_; }
         const std::string& hash_key() { return hash_key_; }
 
+    public:
+        const static int NR_ATTRIBUTE = 3;
+
     private:
         std::string file_name_;
         std::string description_;
