@@ -22,8 +22,40 @@ namespace hashlib {
         return convertor.str();
     }
 
+    std::string Sha1::GetSha1(const unsigned char *msg, size_t len) {
+        uint32_t sha1[5];
+        boost::uuids::detail::sha1 s;
+        std::stringstream convertor;
+        s.process_bytes(msg, len);
+        s.get_digest(sha1);
+
+        for (int i = 0; i < 5; i++)
+            convertor << std::hex << std::setw(8) << std::setfill('0') << sha1[i];
+        return convertor.str();
+    }
+
     std::string Sha1::GetSha1(const std::string &str) {
         return GetSha1(str.c_str(), str.length());
+    }
+
+    int Sha1::GetSha1(const char *msg, size_t len, DigestField &bytes) {
+        boost::uuids::detail::sha1 s;
+        std::stringstream convertor;
+        s.process_bytes(msg, len);
+        s.get_digest(bytes.digest);
+        return 0;
+    }
+
+    int Sha1::GetSha1(const unsigned char *msg, size_t len, DigestField &bytes) {
+        boost::uuids::detail::sha1 s;
+        std::stringstream convertor;
+        s.process_bytes(msg, len);
+        s.get_digest(bytes.digest);
+        return 0;
+    }
+
+    int Sha1::GetSha1(const std::string &str, DigestField &bytes) {
+        return GetSha1(str.c_str(), str.length(), bytes);
     }
 
     int Sha1::IsEqual(const DigestField &d1, const DigestField &d2) {
@@ -39,18 +71,6 @@ namespace hashlib {
         for (int i = 0; i < 5; i++)
             convertor << std::hex << std::setw(8) << std::setfill('0') << bytes.digest[i];
         return convertor.str();
-    }
-
-    int Sha1::GetSha1(const char *msg, size_t len, DigestField &bytes) {
-        boost::uuids::detail::sha1 s;
-        std::stringstream convertor;
-        s.process_bytes(msg, len);
-        s.get_digest(bytes.digest);
-        return 0;
-    }
-
-    int Sha1::GetSha1(const std::string &str, DigestField &bytes) {
-        return GetSha1(str.c_str(), str.length(), bytes);
     }
 
     int Sha1::Str2Bytes(const std::string &str, DigestField &bytes) {

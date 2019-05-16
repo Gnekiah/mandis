@@ -13,8 +13,10 @@ namespace hashlib {
     class Sha1 {
     public:
         static std::string GetSha1(const char *msg, size_t len);
+        static std::string GetSha1(const unsigned char *msg, size_t len);
         static std::string GetSha1(const std::string &str);
         static int GetSha1(const char *msg, size_t len, DigestField &bytes);
+        static int GetSha1(const unsigned char *msg, size_t len, DigestField &bytes);
         static int GetSha1(const std::string &str, DigestField &bytes);
 
         static int IsEqual(const DigestField &d1, const DigestField &d2);
