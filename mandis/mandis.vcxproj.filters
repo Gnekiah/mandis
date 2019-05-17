@@ -19,9 +19,14 @@
     <Filter Include="mandis-p2p\tcpsocket">
       <UniqueIdentifier>{54c7f53a-1792-4dd8-98aa-1ec6a584b3d3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="mandis-fs">
+      <UniqueIdentifier>{5453f666-4f44-4b86-ba22-69b3c3ecddd9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="mandis">
+      <UniqueIdentifier>{ba2c9931-8e54-444f-910d-4ddf819aba0a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp" />
     <ClCompile Include="..\lib\hashlib.cpp">
       <Filter>lib</Filter>
     </ClCompile>
@@ -60,6 +65,24 @@
     </ClCompile>
     <ClCompile Include="..\mandis-p2p\udpclient.cpp">
       <Filter>mandis-p2p\udpsocket</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mandis-fs\foofs.cpp">
+      <Filter>mandis-fs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mandis-fs\file.cpp">
+      <Filter>mandis-fs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mandis-fs\block.cpp">
+      <Filter>mandis-fs</Filter>
+    </ClCompile>
+    <ClCompile Include="config.cpp">
+      <Filter>mandis</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>mandis</Filter>
+    </ClCompile>
+    <ClCompile Include="entry.cpp">
+      <Filter>mandis</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -106,6 +129,21 @@
       <Filter>mandis-p2p\udpsocket</Filter>
     </ClInclude>
     <ClInclude Include="..\include\p2pnet.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\foofs.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mandis-fs\file.h">
+      <Filter>mandis-fs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mandis-fs\block.h">
+      <Filter>mandis-fs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\config.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\entry.h">
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>

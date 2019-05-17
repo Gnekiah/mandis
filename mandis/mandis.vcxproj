@@ -91,6 +91,9 @@ libssl.lib
     <ClCompile Include="..\lib\logger.cpp" />
     <ClCompile Include="..\lib\ssllib.cpp" />
     <ClCompile Include="..\lib\timelib.cpp" />
+    <ClCompile Include="..\mandis-fs\block.cpp" />
+    <ClCompile Include="..\mandis-fs\file.cpp" />
+    <ClCompile Include="..\mandis-fs\foofs.cpp" />
     <ClCompile Include="..\mandis-p2p\connector.cpp" />
     <ClCompile Include="..\mandis-p2p\kadbucket.cpp" />
     <ClCompile Include="..\mandis-p2p\p2pnet.cpp" />
@@ -100,15 +103,22 @@ libssl.lib
     <ClCompile Include="..\mandis-p2p\session.cpp" />
     <ClCompile Include="..\mandis-p2p\udpclient.cpp" />
     <ClCompile Include="..\mandis-p2p\udpserver.cpp" />
+    <ClCompile Include="config.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="entry.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\include\config.h" />
+    <ClInclude Include="..\include\foofs.h" />
     <ClInclude Include="..\include\hashlib.h" />
     <ClInclude Include="..\include\logger.h" />
     <ClInclude Include="..\include\magic.h" />
     <ClInclude Include="..\include\p2pnet.h" />
     <ClInclude Include="..\include\ssllib.h" />
+    <ClInclude Include="..\include\entry.h" />
     <ClInclude Include="..\include\timelib.h" />
+    <ClInclude Include="..\mandis-fs\block.h" />
+    <ClInclude Include="..\mandis-fs\file.h" />
     <ClInclude Include="..\mandis-p2p\connector.h" />
     <ClInclude Include="..\mandis-p2p\kadbucket.h" />
     <ClInclude Include="..\mandis-p2p\request.hpp" />
