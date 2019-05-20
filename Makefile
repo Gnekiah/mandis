@@ -26,7 +26,9 @@ export TOP_DIR OBJ_DIR BIN_DIR INC_DIR SRC_DIR
 export OBJ_LIB OBJ_MANDIS OBJ_MANDIS_FS OBJ_MANDIS_P2P OBJ_MANDIS_CLI
 
 all:
+	@echo "Checking Directory..."
 	$(CHECK_DIR)
+	@echo "Making..."
 	$(SRC_DIR)
 	$(CC) -o $(BIN_DIR)/$(MANDIS_SRV_TARGET) $(OBJ_LIB) $(OBJ_MANDIS) $(OBJ_MANDIS_FS) $(OBJ_MANDIS_P2P)
 	$(CC) -o $(BIN_DIR)/$(MANDIS_CLI_TARGET) $(OBJ_LIB) $(OBJ_MANDIS_CLI)
@@ -37,10 +39,10 @@ CHECK_DIR:
 
 $(SRC_DIR):
 	@echo $@
-	make -C $@
+	$(MAKE) -C $@
 
 .PHONY: clean
 
 clean:
-	make -C $(SRC_DIR) clean
+	$(MAKE) -C $(SRC_DIR) clean
 	rm -rf $(OBJ_DIR)
