@@ -146,9 +146,21 @@
     <ClInclude Include="..\include\entry.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="..\lib\Makefile">
+      <Filter>lib</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Makefile" />
     <None Include="..\README.md" />
+    <None Include="Makefile">
+      <Filter>mandis</Filter>
+    </None>
+    <None Include="..\mandis-p2p\Makefile">
+      <Filter>mandis-p2p</Filter>
+    </None>
+    <None Include="..\mandis-fs\Makefile">
+      <Filter>mandis-fs</Filter>
+    </None>
   </ItemGroup>
 </Project>

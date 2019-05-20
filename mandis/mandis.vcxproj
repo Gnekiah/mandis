@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|x64">
@@ -117,6 +117,7 @@ libssl.lib
     <ClInclude Include="..\include\ssllib.h" />
     <ClInclude Include="..\include\entry.h" />
     <ClInclude Include="..\include\timelib.h" />
+    <ClInclude Include="..\lib\Makefile" />
     <ClInclude Include="..\mandis-fs\block.h" />
     <ClInclude Include="..\mandis-fs\file.h" />
     <ClInclude Include="..\mandis-p2p\connector.h" />
@@ -131,7 +132,10 @@ libssl.lib
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Makefile" />
+    <None Include="..\mandis-fs\Makefile" />
+    <None Include="..\mandis-p2p\Makefile" />
     <None Include="..\README.md" />
+    <None Include="Makefile" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
