@@ -17,7 +17,7 @@ namespace p2pnet {
         if (cnt >= kad_bucket_->size()) {
             for (iter = kad_bucket_->begin(); iter != kad_bucket_->end(); iter++)
                 container.push_back(*iter);
-            return kad_bucket_->size();
+            return (int)kad_bucket_->size();
         }
 
         struct DigestCompare {

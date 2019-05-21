@@ -84,6 +84,12 @@
     <ClCompile Include="entry.cpp">
       <Filter>mandis</Filter>
     </ClCompile>
+    <ClCompile Include="entry_session.cpp">
+      <Filter>mandis</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mandis-p2p\p2pnet_session.cpp">
+      <Filter>mandis-p2p</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\hashlib.h">
@@ -148,6 +154,12 @@
     </ClInclude>
     <ClInclude Include="..\lib\Makefile">
       <Filter>lib</Filter>
+    </ClInclude>
+    <ClInclude Include="entry_session.h">
+      <Filter>mandis</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mandis-p2p\p2pnet_session.h">
+      <Filter>mandis-p2p</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

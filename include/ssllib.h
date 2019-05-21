@@ -11,7 +11,7 @@
 namespace ssllib {
     class RsaPair {
     public:
-        RsaPair(std::string &priv_path, std::string &pub_path, std::string &password,
+        RsaPair(const std::string &priv_path, const std::string &pub_path, const std::string &password,
             logger::Logger *logger, int ras_key_len=2048);
         ~RsaPair();
 

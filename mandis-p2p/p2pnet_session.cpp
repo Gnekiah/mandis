@@ -23,6 +23,7 @@ namespace p2pnet {
         if (ec) {
             return;
         }
+        /*
         int ret = request_parser_.Parse(request_, buffer_.data(), bytes_transferred);
         if (ret == REQUEST_PARSE_SUCCESSFUL) {
             ///TODO: handle request and generate reply info
@@ -38,6 +39,7 @@ namespace p2pnet {
                 shared_from_this(), boost::asio::placeholders::error,
                 boost::asio::placeholders::bytes_transferred));
         }
+        */
     }
 
     void P2PnetSession::HandleWrite(const boost::system::error_code &ec) {

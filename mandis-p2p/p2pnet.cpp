@@ -3,7 +3,7 @@
 namespace p2pnet {
     P2Pnet::P2Pnet(config::Config *config, logger::Logger *logger, config::callback_fn callback, 
         boost::asio::io_context& ioc)
-        : key_(config->rsa_private_key_path, config->rsa_public_key_path, config->rsa_password, logger),
+        : key_(config->rsa_private_key_path(), config->rsa_public_key_path(), config->rsa_password(), logger),
         config_(config),
         logger_(logger),
         callback_(callback),

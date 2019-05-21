@@ -97,6 +97,7 @@ libssl.lib
     <ClCompile Include="..\mandis-p2p\connector.cpp" />
     <ClCompile Include="..\mandis-p2p\kadbucket.cpp" />
     <ClCompile Include="..\mandis-p2p\p2pnet.cpp" />
+    <ClCompile Include="..\mandis-p2p\p2pnet_session.cpp" />
     <ClCompile Include="..\mandis-p2p\request_handler.cpp" />
     <ClCompile Include="..\mandis-p2p\request_parser.cpp" />
     <ClCompile Include="..\mandis-p2p\server.cpp" />
@@ -123,6 +124,7 @@ libssl.lib
     <ClInclude Include="..\mandis-fs\file.h" />
     <ClInclude Include="..\mandis-p2p\connector.h" />
     <ClInclude Include="..\mandis-p2p\kadbucket.h" />
+    <ClInclude Include="..\mandis-p2p\p2pnet_session.h" />
     <ClInclude Include="..\mandis-p2p\request.hpp" />
     <ClInclude Include="..\mandis-p2p\request_handler.h" />
     <ClInclude Include="..\mandis-p2p\request_parser.h" />

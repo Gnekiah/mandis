@@ -5,7 +5,7 @@
 #include "../include/magic.h"
 
 namespace ssllib {
-    RsaPair::RsaPair(std::string &priv_path, std::string &pub_path, std::string &password,
+    RsaPair::RsaPair(const std::string &priv_path, const std::string &pub_path, const std::string &password,
         logger::Logger *logger, int rsa_key_len)
         : private_key_path_(priv_path), public_key_path_(pub_path), password_(password),
         logger_(logger), rsa_key_length_(rsa_key_len) 

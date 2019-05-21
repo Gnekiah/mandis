@@ -112,7 +112,7 @@ namespace foofs {
         for (auto iter = buffer_key_vec.begin(); iter != buffer_key_vec.end(); iter++) 
             ss << (*iter);
         strcpy(buffer, ss.str().c_str());
-        buffer_size = strlen(buffer);
+        buffer_size = (int)strlen(buffer);
         buffer_key = hashlib::Sha1::GetSha1(buffer, buffer_size);
         buffer_flag = 1;
 
@@ -150,7 +150,7 @@ namespace foofs {
     int FooFS::ReadByHash(std::string &file_hash) {
         File *file = (*hash_to_file_.find(file_hash)).second;
         if (file == nullptr)
-            return;
+            return 0;
         // TODO: not use
         assert(0);
     }
@@ -188,7 +188,7 @@ namespace foofs {
         {
             vec.push_back(temp);
         }
-        return vec.size();
+        return (int)vec.size();
     }
 
     int FooFS::Str2Int(std::string &str) {
