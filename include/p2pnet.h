@@ -3,6 +3,8 @@
 
 #include <map>
 #include <boost/asio.hpp>
+#include <boost/enable_shared_from_this.hpp>
+#include <boost/array.hpp>
 
 #include "../include/config.h"
 #include "../include/ssllib.h"
@@ -15,7 +17,7 @@ namespace p2pnet {
     
     typedef boost::shared_ptr<P2PnetSession> session_ptr;
 
-    class P2Pnet {
+    class P2Pnet : public boost::enable_shared_from_this<P2PnetSession> {
     public:
         P2Pnet(config::Config *config, logger::Logger *logger, config::callback_fn callback, boost::asio::io_context& ioc);
         ~P2Pnet();

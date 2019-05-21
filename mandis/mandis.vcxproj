@@ -57,6 +57,7 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <PreprocessorDefinitions>_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <AdditionalDependencies>gtestd.lib;gtest_maind.lib;libcrypto.lib
@@ -75,6 +76,7 @@ libssl.lib
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <PreprocessorDefinitions>_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -94,16 +96,9 @@ libssl.lib
     <ClCompile Include="..\mandis-fs\block.cpp" />
     <ClCompile Include="..\mandis-fs\file.cpp" />
     <ClCompile Include="..\mandis-fs\foofs.cpp" />
-    <ClCompile Include="..\mandis-p2p\connector.cpp" />
     <ClCompile Include="..\mandis-p2p\kadbucket.cpp" />
     <ClCompile Include="..\mandis-p2p\p2pnet.cpp" />
     <ClCompile Include="..\mandis-p2p\p2pnet_session.cpp" />
-    <ClCompile Include="..\mandis-p2p\request_handler.cpp" />
-    <ClCompile Include="..\mandis-p2p\request_parser.cpp" />
-    <ClCompile Include="..\mandis-p2p\server.cpp" />
-    <ClCompile Include="..\mandis-p2p\session.cpp" />
-    <ClCompile Include="..\mandis-p2p\udpclient.cpp" />
-    <ClCompile Include="..\mandis-p2p\udpserver.cpp" />
     <ClCompile Include="config.cpp" />
     <ClCompile Include="entry_session.cpp" />
     <ClCompile Include="main.cpp" />
@@ -122,16 +117,8 @@ libssl.lib
     <ClInclude Include="..\lib\Makefile" />
     <ClInclude Include="..\mandis-fs\block.h" />
     <ClInclude Include="..\mandis-fs\file.h" />
-    <ClInclude Include="..\mandis-p2p\connector.h" />
     <ClInclude Include="..\mandis-p2p\kadbucket.h" />
     <ClInclude Include="..\mandis-p2p\p2pnet_session.h" />
-    <ClInclude Include="..\mandis-p2p\request.hpp" />
-    <ClInclude Include="..\mandis-p2p\request_handler.h" />
-    <ClInclude Include="..\mandis-p2p\request_parser.h" />
-    <ClInclude Include="..\mandis-p2p\server.h" />
-    <ClInclude Include="..\mandis-p2p\session.h" />
-    <ClInclude Include="..\mandis-p2p\udpclient.h" />
-    <ClInclude Include="..\mandis-p2p\udpserver.h" />
     <ClInclude Include="entry_session.h" />
   </ItemGroup>
   <ItemGroup>

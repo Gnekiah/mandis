@@ -145,6 +145,7 @@ namespace foofs {
             return -1;
 
 
+        return 0;
     }
     
     int FooFS::ReadByHash(std::string &file_hash) {
@@ -153,14 +154,17 @@ namespace foofs {
             return 0;
         // TODO: not use
         assert(0);
+        return 0;
     }
 
     int FooFS::Delete() {
 
+        return 0;
     }
 
     int FooFS::ReadMetaData() {
 
+        return 0;
     }
 
     void FooFS::Run() {
