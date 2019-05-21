@@ -13,7 +13,9 @@ namespace frontend {
     }
 
     void EntrySession::Start() {
-
+        boost::asio::async_read(socket_, boost::asio::buffer(buffer_.data(), 1024 * 512), 
+            boost::bind(&EntrySession::HandleRead, shared_from_this(), boost::asio::placeholders::error,
+                boost::asio::placeholders::bytes_transferred));
     }
 
     boost::asio::ip::tcp::socket& EntrySession::socket() {
@@ -24,6 +26,7 @@ namespace frontend {
         if (ec) {
             return;
         }
+        /*
         int ret = request_parser_.Parse(request_, buffer_.data(), bytes_transferred);
         if (ret == REQUEST_PARSE_SUCCESSFUL) {
             ///TODO: handle request and generate reply info
@@ -39,6 +42,7 @@ namespace frontend {
                 shared_from_this(), boost::asio::placeholders::error,
                 boost::asio::placeholders::bytes_transferred));
         }
+        */
     }
 
     void EntrySession::HandleWrite(const boost::system::error_code &ec) {
@@ -46,6 +50,11 @@ namespace frontend {
             return;
         }
         ///TODO: handle write
+    }
+
+    int EntrySession::ParsePackage(unsigned char* buff, size_t offset) {
+
+        return 0;
     }
 
     void EntrySession::Close() {

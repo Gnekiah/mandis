@@ -3,13 +3,13 @@
 
 #include <boost/bind.hpp>
 #include <boost/shared_ptr.hpp>
-#include <boost/enable_shared_from_this.hpp>
 #include <boost/asio.hpp>
 #include <boost/array.hpp>
+#include <boost/enable_shared_from_this.hpp>
 
 namespace frontend {
 
-    class EntrySession {
+    class EntrySession : public boost::enable_shared_from_this<EntrySession> {
     public:
         EntrySession(boost::asio::io_context& ioc);
         ~EntrySession();
@@ -28,6 +28,7 @@ namespace frontend {
         void Close();
 
     private:
+        size_t buffer_length_;
         boost::array<unsigned char, 1024 * 512> buffer_;
         boost::asio::ip::tcp::socket socket_;
     };
