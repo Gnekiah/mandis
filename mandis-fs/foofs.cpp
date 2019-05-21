@@ -7,11 +7,13 @@
 
 namespace foofs {
 
-    FooFS::FooFS(config::Config *config, p2pnet::P2Pnet *p2pnet, logger::Logger *logger) 
+    FooFS::FooFS(config::Config *config, p2pnet::P2Pnet *p2pnet, logger::Logger *logger)
         : config_(config),
         p2pnet_(p2pnet), 
         logger_(logger)
     {
+        cbfn = this;
+
         int ret = 0;
         char buffer[1024];
         std::vector<std::string> vec;
@@ -194,5 +196,11 @@ namespace foofs {
         std::istringstream iss(str);
         iss >> ret;
         return ret;
+    }
+
+    ///for callback
+    void CallBack(int cbtype, void* ptr) {
+        FooFS *foofs = (FooFS*)cbfn;
+        //foofs->DispatchSpi(cbtype, ptr);
     }
 }

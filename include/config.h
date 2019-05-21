@@ -7,6 +7,9 @@
 
 namespace config {
 
+    typedef void(*callback_fn) (int, void*);
+
+
     class Config {
     public:
         Config(std::string &config_filepath);

@@ -4,6 +4,7 @@
 #include <set>
 #include <map>
 #include <vector>
+
 #include "../include/logger.h"
 #include "../include/config.h"
 #include "../include/p2pnet.h"
@@ -11,6 +12,9 @@
 #include "../mandis-fs/block.h"
 
 namespace foofs {
+
+    static volatile void* cbfn = nullptr;
+    void CallBack(int cbtype, void* ptr);
 
     class FooFS {
     public:

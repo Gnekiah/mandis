@@ -104,6 +104,7 @@ libssl.lib
     <ClCompile Include="..\mandis-p2p\udpclient.cpp" />
     <ClCompile Include="..\mandis-p2p\udpserver.cpp" />
     <ClCompile Include="config.cpp" />
+    <ClCompile Include="entry_session.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="entry.cpp" />
   </ItemGroup>
@@ -129,6 +130,7 @@ libssl.lib
     <ClInclude Include="..\mandis-p2p\session.h" />
     <ClInclude Include="..\mandis-p2p\udpclient.h" />
     <ClInclude Include="..\mandis-p2p\udpserver.h" />
+    <ClInclude Include="entry_session.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Makefile" />
