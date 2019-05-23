@@ -3,14 +3,14 @@
 #include <boost/asio.hpp>
 #include <boost/array.hpp>
 #include <boost/bind.hpp>
-#include <boost/enable_shared_from_this.hpp>
 
-class Session : public boost::enable_shared_from_this<Session> {
+class Session {
 public:
     Session(boost::asio::io_context& ioc, const boost::asio::ip::tcp::endpoint& ep, std::string& msg)
         : ioc_(ioc),
         socket_(ioc),
         msg_(msg) {
+        std::cout << "====[DEBUG]==== Session On: Async Connect" << std::endl;
         socket_.async_connect(ep, boost::bind(&Session::HandleConnect, this,
             boost::asio::placeholders::error));
     }
@@ -18,29 +18,36 @@ public:
 private:
     void HandleConnect(const boost::system::error_code& ec) {
         if (ec) {
-            std::cerr << "Fatal: Error on HandleConnect" << std::endl;
+            std::cerr << "====[DEBUG]==== Fatal: Error on Handle Connect" << std::endl;
             std::cerr << ec.message() << std::endl;
             return;
         }
+        std::cout << "====[DEBUG]==== Handle Connect, write msg: " << msg_ << std::endl;
         boost::asio::async_write(socket_, boost::asio::buffer(msg_.data(), msg_.length()), 
             boost::bind(&Session::HandleWrite, this, boost::asio::placeholders::error));
     }
 
     void HandleWrite(const boost::system::error_code& ec) {
         if (ec) {
-            std::cerr << "Fatal: Error on HandleWrite" << std::endl;
+            std::cerr << "====[DEBUG]==== Fatal: Error on Handle Write" << std::endl;
+            std::cerr << ec.message() << std::endl;
             return;
         }
-        boost::asio::async_read(socket_, boost::asio::buffer(buffer_.data(), 1024 * 512),
-            boost::bind(&Session::HandleRead, shared_from_this(), boost::asio::placeholders::error,
+        std::cout << "====[DEBUG]==== Handle Write" << std::endl;
+        socket_.async_read_some(boost::asio::buffer(buffer_.data(), 1024 * 512),
+            boost::bind(&Session::HandleRead, this, boost::asio::placeholders::error,
                 boost::asio::placeholders::bytes_transferred));
     }
 
     void HandleRead(const boost::system::error_code& ec, std::size_t bytes_transferred) {
         if (ec) {
-            std::cerr << "Fatal: Error on HandleRead" << std::endl;
+            std::cerr << "====[DEBUG]==== Fatal: Error on Handle Read" << std::endl;
+            std::cerr << "====[DEBUG]==== ecode= " << ec.value() << ", msg= " << ec.message() << std::endl;
             return;
         }
+        std::cout << "====[DEBUG]==== Handle Read" << std::endl;
+        std::cout << std::endl << "RESULT: *********************************************" << std::endl;
+        std::cout << buffer_.data() << std::endl;
     }
 
 private:
@@ -52,13 +59,18 @@ private:
 };
 
 
-int DoConnect(std::string ops="", std::string filepath="", std::string filename="") {
+int DoConnect(std::string ops=" ", std::string filepath=" ", std::string filename=" ") {
     /// ops = list, writ, read
-    boost::asio::io_context ioc;
-    boost::asio::ip::tcp::endpoint ep(boost::asio::ip::address::from_string("127.0.0.1"), 60001);
-    std::string msg = ops + "|" + filepath + "|" + filename;
-    Session session(ioc, ep, msg);
-    ioc.run();
+    try {
+        boost::asio::io_context ioc;
+        boost::asio::ip::tcp::endpoint ep(boost::asio::ip::address::from_string("127.0.0.1"), 60001);
+        std::string msg = ops + "|" + filepath + "|" + filename;
+        Session session(ioc, ep, msg);
+        ioc.run();
+    }
+    catch (std::exception& e) {
+        std::cerr << "====[DEBUG]==== Exception: " << e.what() << std::endl;
+    }
     return 0;
 }
 
