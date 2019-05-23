@@ -261,3 +261,5 @@ __pycache__/
 *.pyc
 
 block-path/
+block-info
+file-info
