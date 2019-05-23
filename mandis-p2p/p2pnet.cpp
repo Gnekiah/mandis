@@ -8,7 +8,7 @@ namespace p2pnet {
         logger_(logger),
         callback_(callback),
         ioc_(ioc),
-        acceptor_(ioc_, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), 60001))
+        acceptor_(ioc_, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), 60002))
     {
         // run callback demo: (*quote_callback)(CB_QUOTE_FRONT_CONNECTED, nullptr);
         StartAccept();

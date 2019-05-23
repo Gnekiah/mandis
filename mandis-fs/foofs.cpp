@@ -69,13 +69,14 @@ namespace foofs {
     int FooFS::Write(std::string &filepath) {
         std::ifstream fin(filepath, std::ios::binary);
         if (!fin) {
-            assert(0);
+            LOG_WARNING(logger_, "File Not Found");
             // message: cannot open the file 'filepath'
             return -1;
         }
 
         std::string buffer_key;
         int buffer_size, buffer_flag;
+        int block_cnt = 0;
         char buffer[1024 * 512];
         std::vector<std::string> buffer_key_vec;
         while (fin) {
@@ -100,6 +101,7 @@ namespace foofs {
             std::ofstream fout(out_path.string(), std::ios::binary);
             fout.write(buffer, buffer_size);
             fout.close();
+            block_cnt++;
 
             Block *block = new Block(buffer_key, buffer_size, buffer_flag);
             hash_to_block_.insert(std::pair<std::string, Block*>(block->hash_key(), block));
@@ -108,9 +110,11 @@ namespace foofs {
         }
         fin.close();
 
+        LOG_INFO(logger_, "Write Blocks= " + boost::lexical_cast<std::string>(block_cnt));
+
         std::stringstream ss;
         for (auto iter = buffer_key_vec.begin(); iter != buffer_key_vec.end(); iter++) 
-            ss << (*iter);
+            ss << (*iter) << std::endl;
         strcpy(buffer, ss.str().c_str());
         buffer_size = (int)strlen(buffer);
         buffer_key = hashlib::Sha1::GetSha1(buffer, buffer_size);
@@ -151,7 +155,7 @@ namespace foofs {
     int FooFS::ReadByHash(std::string &file_hash) {
         File *file = (*hash_to_file_.find(file_hash)).second;
         if (file == nullptr)
-            return 0;
+            return -1;
         // TODO: not use
         assert(0);
         return 0;
@@ -162,9 +166,14 @@ namespace foofs {
         return 0;
     }
 
-    int FooFS::ReadMetaData() {
+    int FooFS::ReadMetaData(char* buffer) {
+        std::stringstream ss;
+        ss << "Hash Key                                    File Name" << std::endl;
+        for (auto iter = file_vec_.begin(); iter != file_vec_.end(); iter++) 
+            ss << (*iter)->hash_key() << "    " << (*iter)->file_name() << std::endl;
 
-        return 0;
+        strcpy(buffer, ss.str().c_str());
+        return ss.str().length();
     }
 
     void FooFS::Run() {

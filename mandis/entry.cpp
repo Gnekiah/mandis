@@ -7,7 +7,7 @@ namespace frontend {
         logger_(logger), 
         foofs_(foofs),
         ioc_(ioc),
-        acceptor_(ioc_, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), 60001))
+        acceptor_(ioc_, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), config->entry_port()))
     {
         StartAccept();
     }
@@ -33,16 +33,18 @@ namespace frontend {
     }
 
     void Entry::StartAccept() {
-        session_ptr session(new EntrySession(ioc_));
+        LOG_TRACE(logger_, "Start Accept");
+        session_ptr session(new EntrySession(ioc_, logger_, foofs_));
         acceptor_.async_accept(session->socket(), boost::bind(&Entry::HandleAccept, this, 
             session, boost::asio::placeholders::error));
     }
 
     void Entry::HandleAccept(session_ptr session, const boost::system::error_code& ec) {
-        if (!ec)
-        {
+        LOG_TRACE(logger_, "Handle Accept");
+        if (ec)
+            LOG_WARNING(logger_, "ecode= " + boost::lexical_cast<std::string>(ec.value()) + ", msg= " + ec.message());
+        else
             session->Start();
-        }
         StartAccept();
     }
 }

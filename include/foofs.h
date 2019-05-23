@@ -25,14 +25,13 @@ namespace foofs {
         int ReadByName(std::string &file_name, std::string &dest_path);
         int ReadByHash(std::string &filehash);
         int Delete();
-        int ReadMetaData();
+        int ReadMetaData(char* buffer);
 
         void Run();
         void Start();
         void Stop();
         void Join();
         
-    private:
         int Split(std::vector<std::string> &vec, const std::string &str, const char pattern);
         int Str2Int(std::string &str);
 
