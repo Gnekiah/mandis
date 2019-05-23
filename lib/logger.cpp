@@ -69,6 +69,11 @@ namespace logger {
             }
             log_stream << log.caller << "> " << log.logmsg << std::endl;
             out << log_stream.str().c_str();
+
+#ifdef _ON_DEBUG
+            std::cerr << log_stream.str();
+#endif
+
             log_stream.str("");
             out.flush();
         }
