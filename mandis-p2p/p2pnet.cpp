@@ -47,4 +47,60 @@ namespace p2pnet {
         }
         StartAccept();
     }
+
+    int P2Pnet::ReqStore(std::string key, std::string block_path) {
+        return 0;
+    }
+
+    int P2Pnet::ReqAccess(std::string key) {
+        return 0;
+
+    }
+
+    int P2Pnet::ReqSync(std::string msg) {
+        return 0;
+
+    }
+
+    int P2Pnet::ReqFind(std::string key) {
+        return 0;
+
+    }
+
+    int P2Pnet::Ping() {
+        return 0;
+
+    }
+
+    int P2Pnet::RspStore(std::string block_path) {
+        return 0;
+
+    }
+
+    int P2Pnet::RspAccess(std::string key) {
+        return 0;
+
+    }
+
+    int P2Pnet::RspSync(std::string msg) {
+        return 0;
+
+    }
+
+    int P2Pnet::RspFind(std::string key) {
+        return 0;
+
+    }
+
+    int P2Pnet::Pong() {
+        return 0;
+
+    }
+
+
+
+
+
+
+
 }

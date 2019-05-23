@@ -27,6 +27,20 @@ namespace p2pnet {
         void Stop();
         void Join();
 
+    public:
+        int ReqStore(std::string key, std::string block_path);
+        int ReqAccess(std::string key);
+        int ReqSync(std::string msg);
+        int ReqFind(std::string key);
+        int Ping();
+
+    private:
+        int RspStore(std::string block_path);
+        int RspAccess(std::string key);
+        int RspSync(std::string msg);
+        int RspFind(std::string key);
+        int Pong();
+
     private:
         ssllib::RsaPair key_;
         hashlib::DigestField id_;
