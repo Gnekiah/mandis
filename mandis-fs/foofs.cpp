@@ -154,6 +154,7 @@ namespace foofs {
             file_vec_.push_back(file);
 
             file_for_append = file;
+            blocks_for_append_vec.push_back(block);
         }
         ///write blocks_for_append_vec to file
         std::ofstream fout(config_->block_filepath(), std::ios::app);
@@ -161,6 +162,10 @@ namespace foofs {
             std::stringstream ss;
             ss << (*iter)->hash_key() << "|" << (*iter)->buffer_size() << "|" << (*iter)->block_flag() << std::endl;
             fout.write(ss.str().c_str(), ss.str().length());
+
+            boost::filesystem::path out_path = boost::filesystem::path(config_->block_path()) / (*iter)->hash_key();
+            ///store to remote
+            p2pnet_->ReqStore((*iter)->hash_key(), out_path.string());
         }
         fout.close();
 
@@ -171,6 +176,8 @@ namespace foofs {
             fout.open(config_->file_filepath(), std::ios::app);
             fout.write(ss.str().c_str(), ss.str().length());
             fout.close();
+            ///sync to remote
+            p2pnet_->ReqSync(ss.str());
         }
 
         return 0;
@@ -187,7 +194,8 @@ namespace foofs {
         std::ifstream fin((boost::filesystem::path(config_->block_path()) / file->hash_key()).string());
         if (!fin) {
             LOG_TRACE(logger_, "File Not Found On Local, Try To Get From P2Pnet");
-            ///TODO: Get Block From P2Pnet
+            /// Get Block From P2Pnet
+            p2pnet_->ReqAccess(file->hash_key());
         }
 
         LOG_TRACE(logger_, "Read File From: " + file_name + " To: " + dest_path);
@@ -201,7 +209,8 @@ namespace foofs {
             hash_vec.push_back(buffer);
             std::string block_path = (boost::filesystem::path(config_->block_path()) / buffer).string();
             if (!boost::filesystem::exists(block_path)) {
-                ///TODO: Get Block From P2Pnet
+                /// Get Block From P2Pnet
+                p2pnet_->ReqAccess(buffer);
             }
         }
         fin.close();
