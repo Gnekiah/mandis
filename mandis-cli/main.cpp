@@ -3,6 +3,7 @@
 #include <boost/asio.hpp>
 #include <boost/array.hpp>
 #include <boost/bind.hpp>
+#include <boost/filesystem.hpp>
 
 class Session {
 public:
@@ -111,8 +112,8 @@ int main(int argc, char** argv) {
         }
         std::string filepath = argv[2];
         std::cout << "write: " << filepath << std::endl;
-        /// write [filepath] to mandis
-        DoConnect("writ", filepath);
+        /// write [filepath] to mandis 
+        DoConnect("writ", boost::filesystem::system_complete(boost::filesystem::path(filepath)).string());
         return 0;
     }
 
@@ -125,7 +126,7 @@ int main(int argc, char** argv) {
         std::string filepath = argv[3];
         std::cout << "read: " << filename << " from mandis to " << filepath << std::endl;
         /// read [filename] from mandis to [filepath]
-        DoConnect("read", filepath, filename);
+        DoConnect("read", boost::filesystem::system_complete(boost::filesystem::path(filepath)).string(), filename);
         return 0;
     }
 
