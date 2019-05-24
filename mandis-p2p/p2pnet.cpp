@@ -68,8 +68,8 @@ namespace p2pnet {
     }
 
     int P2Pnet::Ping() {
+        ///not used
         return 0;
-
     }
 
     int P2Pnet::RspStore(std::string block_path) {
@@ -93,8 +93,8 @@ namespace p2pnet {
     }
 
     int P2Pnet::Pong() {
+        ///not used
         return 0;
-
     }
 
 

@@ -12,10 +12,12 @@
 #include "../include/logger.h"
 #include "../mandis-p2p/kadbucket.h"
 #include "../mandis-p2p/p2pnet_session.h"
+#include "../mandis-p2p/req_session.h"
 
 namespace p2pnet {
     
     typedef boost::shared_ptr<P2PnetSession> session_ptr;
+    typedef boost::shared_ptr<ReqSession> req_session_ptr;
 
     class P2Pnet : public boost::enable_shared_from_this<P2PnetSession> {
     public:
@@ -28,18 +30,23 @@ namespace p2pnet {
         void Join();
 
     public:
+        /// store|<key>|<buffer_size>
+        /// access|<key>
+        /// sync|<msg>
+        /// find|<key>
+        /// ping
         int ReqStore(std::string key, std::string block_path);
         int ReqAccess(std::string key);
         int ReqSync(std::string msg);
         int ReqFind(std::string key);
-        int Ping();
+        int Ping(); ///not used
 
     private:
         int RspStore(std::string block_path);
         int RspAccess(std::string key);
         int RspSync(std::string msg);
         int RspFind(std::string key);
-        int Pong();
+        int Pong(); ///not used
 
     private:
         ssllib::RsaPair key_;
