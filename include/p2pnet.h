@@ -19,7 +19,7 @@ namespace p2pnet {
     typedef boost::shared_ptr<P2PnetSession> session_ptr;
     typedef boost::shared_ptr<ReqSession> req_session_ptr;
 
-    class P2Pnet : public boost::enable_shared_from_this<P2PnetSession> {
+    class P2Pnet {
     public:
         P2Pnet(config::Config *config, logger::Logger *logger, config::callback_fn callback, boost::asio::io_context& ioc);
         ~P2Pnet();

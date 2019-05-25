@@ -5,13 +5,14 @@
 #include <boost/shared_ptr.hpp>
 #include <boost/enable_shared_from_this.hpp>
 #include <boost/asio.hpp>
+#include "../include/logger.h"
 
 namespace p2pnet {
     
-    class P2PnetSession {
+    class P2PnetSession : public boost::enable_shared_from_this<P2PnetSession> {
 
     public:
-        P2PnetSession(boost::asio::io_context& ioc);
+        P2PnetSession(boost::asio::io_context& ioc, logger::Logger* logger);
         ~P2PnetSession();
 
         void Start();
@@ -26,9 +27,13 @@ namespace p2pnet {
         /* Close the session. */
         void Close();
 
+        int Split(std::vector<std::string>& vec, const std::string& str, const char pattern);
+
     private:
         boost::asio::ip::tcp::socket socket_;
-
+        size_t buffer_length_;
+        boost::array<char, 1024 * 512> buffer_;
+        logger::Logger* logger_ = nullptr;
     };
 }
 

@@ -15,9 +15,9 @@ namespace p2pnet {
         ~ReqSession() { }
 
         int DoReqStore(std::string key, std::string block_path);
-        int DoReqAccess(std::string key);
+        int DoReqAccess(std::string key, std::string block_path);
         int DoReqSync(std::string msg);
-        int DoReqFind(std::string key);
+        std::string DoReqFind(std::string key);
         int DoPing();
 
     private:
@@ -25,8 +25,6 @@ namespace p2pnet {
         boost::asio::io_context& ioc_;
         boost::asio::ip::tcp::socket socket_;
         boost::asio::ip::tcp::endpoint ep_;
-        size_t buffer_length_;
-        boost::array<unsigned char, 1024 * 512> buffer_;
         logger::Logger* logger_ = nullptr;
     };
 

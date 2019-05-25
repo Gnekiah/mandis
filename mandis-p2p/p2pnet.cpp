@@ -35,7 +35,7 @@ namespace p2pnet {
     }
 
     void P2Pnet::StartAccept() {
-        session_ptr session(new P2PnetSession(ioc_));
+        session_ptr session(new P2PnetSession(ioc_, logger_));
         acceptor_.async_accept(session->socket(), boost::bind(&P2Pnet::HandleAccept, this,
             session, boost::asio::placeholders::error));
     }
