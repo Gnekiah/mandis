@@ -99,11 +99,17 @@ namespace frontend {
             LOG_WARNING(logger_, "ecode= " + boost::lexical_cast<std::string>(ec.value()) + ", msg= " + ec.message());
             return;
         }
-        Close();
+        //Close();
     }
 
     void EntrySession::Close() {
         boost::system::error_code ignored_ec;
-        socket_.shutdown(boost::asio::ip::tcp::socket::shutdown_both, ignored_ec);
+        try {
+            socket_.shutdown(boost::asio::ip::tcp::socket::shutdown_both, ignored_ec);
+        }
+        catch (std::exception &e) {
+            LOG_TRACE(logger_, e.what());
+        }
+
     }
 }

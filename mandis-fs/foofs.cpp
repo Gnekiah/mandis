@@ -87,18 +87,17 @@ namespace foofs {
         std::string buffer_key;
         int buffer_size, buffer_flag;
         int block_cnt = 0;
-        char buffer[1024 * 512];
         std::vector<std::string> buffer_key_vec;
         
         while (fin) {
-            fin.read(buffer, 1024 * 512);
+            fin.read(buffer_.data(), 1024 * 512);
             buffer_size = fin.gcount();
             if (buffer_size <= 0) {
                 assert(0);
                 continue;
             }
 
-            buffer_key = hashlib::Sha1::GetSha1(buffer, buffer_size);
+            buffer_key = hashlib::Sha1::GetSha1(buffer_.data(), buffer_size);
             buffer_flag = 0;
             buffer_key_vec.push_back(buffer_key);
 
@@ -110,7 +109,7 @@ namespace foofs {
 
             boost::filesystem::path out_path = boost::filesystem::path(config_->block_path()) / buffer_key;
             std::ofstream fout(out_path.string(), std::ios::binary);
-            fout.write(buffer, buffer_size);
+            fout.write(buffer_.data(), buffer_size);
             fout.close();
             block_cnt++;
 
@@ -128,9 +127,9 @@ namespace foofs {
         std::stringstream ss;
         for (auto iter = buffer_key_vec.begin(); iter != buffer_key_vec.end(); iter++) 
             ss << (*iter) << std::endl;
-        strcpy(buffer, ss.str().c_str());
-        buffer_size = (int)strlen(buffer);
-        buffer_key = hashlib::Sha1::GetSha1(buffer, buffer_size);
+        strcpy(buffer_.data(), ss.str().c_str());
+        buffer_size = (int)strlen(buffer_.data());
+        buffer_key = hashlib::Sha1::GetSha1(buffer_.data(), buffer_size);
         buffer_flag = 1;
 
         std::set<std::string>::iterator iter = block_set_.find(buffer_key);
@@ -138,7 +137,7 @@ namespace foofs {
         if (iter == block_set_.end()) {
             boost::filesystem::path out_path = boost::filesystem::path(config_->block_path()) / buffer_key;
             std::ofstream fout(out_path.string(), std::ios::binary);
-            fout.write(buffer, buffer_size);
+            fout.write(buffer_.data(), buffer_size);
             fout.close();
 
             Block *block = new Block(buffer_key, buffer_size, buffer_flag);
@@ -201,16 +200,15 @@ namespace foofs {
         LOG_TRACE(logger_, "Read File From: " + file_name + " To: " + dest_path);
         int ret = 0;
         int buffer_size;
-        char buffer[1024 * 512];
         while (fin) {
-            fin.getline(buffer, sizeof(buffer));
-            if (buffer[0] == '\0')
+            fin.getline(buffer_.data(), 1024 * 512);
+            if (buffer_.data()[0] == '\0')
                 break;
-            hash_vec.push_back(buffer);
-            std::string block_path = (boost::filesystem::path(config_->block_path()) / buffer).string();
+            hash_vec.push_back(buffer_.data());
+            std::string block_path = (boost::filesystem::path(config_->block_path()) / buffer_.data()).string();
             if (!boost::filesystem::exists(block_path)) {
                 /// Get Block From P2Pnet
-                p2pnet_->ReqAccess(buffer);
+                p2pnet_->ReqAccess(buffer_.data());
             }
         }
         fin.close();
@@ -224,10 +222,10 @@ namespace foofs {
         for (auto iter = hash_vec.begin(); iter != hash_vec.end(); iter++) {
             std::string block_path = (boost::filesystem::path(config_->block_path()) / (*iter)).string();
             fin.open(block_path, std::ios::binary);
-            fin.read(buffer, 1024 * 512);
+            fin.read(buffer_.data(), 1024 * 512);
             buffer_size = fin.gcount();
             fin.close();
-            fout.write(buffer, buffer_size);
+            fout.write(buffer_.data(), buffer_size);
         }
         fout.close();
         return 0;

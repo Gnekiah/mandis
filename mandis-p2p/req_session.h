@@ -10,7 +10,7 @@
 namespace p2pnet {
     class ReqSession {
     public:
-        ReqSession(boost::asio::io_context& ioc, const std::string ip, const int port, std::string& msg,
+        ReqSession(boost::asio::io_context& ioc, const std::string ip, const int port,
             logger::Logger* logger);
         ~ReqSession() { }
 
@@ -21,7 +21,8 @@ namespace p2pnet {
         int DoPing();
 
     private:
-        std::string& msg_;
+        size_t buffer_length_;
+        boost::array<char, 1024 * 512> buffer_;
         boost::asio::io_context& ioc_;
         boost::asio::ip::tcp::socket socket_;
         boost::asio::ip::tcp::endpoint ep_;

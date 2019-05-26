@@ -49,6 +49,8 @@ namespace p2pnet {
     }
 
     int P2Pnet::ReqStore(std::string key, std::string block_path) {
+        ReqSession session(ioc_, "127.0.0.1", 60002, logger_);
+        session.DoReqStore(key, block_path);
         return 0;
     }
 
@@ -96,11 +98,5 @@ namespace p2pnet {
         ///not used
         return 0;
     }
-
-
-
-
-
-
 
 }

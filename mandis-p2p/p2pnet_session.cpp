@@ -43,15 +43,18 @@ namespace p2pnet {
         /// ping
         if (ret == 3 && vec[0] == "store") {
             LOG_TRACE(logger_, "Rsp Store");
-
+            ///TODO!!!!!!!!!!!!!!!!!!!!!!!!!!
         }
         else if (ret == 2 && vec[0] == "access") {
+            LOG_TRACE(logger_, "Rsp Access");
 
         }
         else if (ret == 2 && vec[0] == "sync") {
+            LOG_TRACE(logger_, "Rsp Sync");
 
         }
         else if (ret == 2 && vec[0] == "find") {
+            LOG_TRACE(logger_, "Rsp Find");
 
         }
         else if (ret == 1 && vec[0] == "ping") {
@@ -61,54 +64,6 @@ namespace p2pnet {
             LOG_WARNING(logger_, "Command Error, cmd=" + cmdstr);
             Close();
         }
-        /*
-        std::string cmd_ops = vec[0];
-        std::string cmd_filepath = vec[1];
-        std::string cmd_filename = vec[2];
-        std::stringstream ss;
-        ss << "Mandis-cli: ops= " << cmd_ops << ", filepath= " << cmd_filepath << ", filename= " << cmd_filename;
-        LOG_TRACE(logger_, ss);
-
-        std::string msgback;
-        if (cmd_ops == "list") {
-            char msg[4096];
-            ret = foofs_->ReadMetaData(msg);
-            if (ret > 0) {
-                msg[ret] = '\0';
-                msgback = msg;
-            }
-            else
-                msgback = "Failed";
-        }
-        else if (cmd_ops == "writ") {
-            ret = foofs_->Write(cmd_filepath);
-            if (ret == 0) {
-                LOG_INFO(logger_, "File Wrote: " + cmd_filepath);
-                msgback = "Completed";
-            }
-            else {
-                msgback = "Failed";
-            }
-        }
-        else if (cmd_ops == "read") {
-            ret = foofs_->ReadByName(cmd_filename, cmd_filepath);
-            if (ret == 0) {
-                LOG_INFO(logger_, "File Read: " + cmd_filename);
-                msgback = "Completed";
-            }
-            else {
-                msgback = "Failed";
-            }
-        }
-        else {
-            LOG_WARNING(logger_, "Error Command");
-            msgback = "Error Command";
-        }
-
-        boost::asio::async_write(socket_, boost::asio::buffer(msgback.c_str(), msgback.length()),
-            boost::bind(&EntrySession::HandleWrite, this, boost::asio::placeholders::error));
-        */
-
     }
 
     void P2PnetSession::HandleWrite(const boost::system::error_code &ec) {

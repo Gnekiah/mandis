@@ -44,6 +44,9 @@ namespace foofs {
         std::map<std::string, File*> hash_to_file_;
         std::set<std::string> file_set_;    /* not used, assume not repeating file */
         std::vector<File*> file_vec_;
+
+        boost::array<char, 1024 * 512> buffer_;
+
         config::Config *config_ = nullptr;
         p2pnet::P2Pnet *p2pnet_ = nullptr;
         logger::Logger *logger_ = nullptr;
