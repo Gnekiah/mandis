@@ -33,7 +33,7 @@ int main(int argc, char **argv)
 
     boost::asio::io_context ioc;
     LOG_INFO(logger, "P2Pnet Init...");
-    p2pnet::P2Pnet *p2pnet = new p2pnet::P2Pnet(config, logger, foofs::CallBack, ioc);
+    p2pnet::P2Pnet *p2pnet = new p2pnet::P2Pnet(config, logger, ioc);
     p2pnet->Start();
 
     LOG_INFO(logger, "FooFS Init...");
@@ -41,7 +41,7 @@ int main(int argc, char **argv)
     foofs->Start();
 
     LOG_INFO(logger, "Entry Init...");
-    frontend::Entry *entry = new frontend::Entry(config, foofs, logger, ioc);
+    frontend::Entry *entry = new frontend::Entry(config, foofs, logger, p2pnet, ioc);
     entry->Start();
 
     LOG_INFO(logger, "Mandis running...");

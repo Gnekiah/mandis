@@ -9,6 +9,7 @@
 #include "../include/logger.h"
 #include "../include/config.h"
 #include "../include/foofs.h"
+#include "../include/p2pnet.h"
 
 namespace frontend {
 
@@ -16,7 +17,8 @@ namespace frontend {
 
     class Entry {
     public:
-        Entry(config::Config *config, foofs::FooFS *foofs, logger::Logger *logger, boost::asio::io_context& ioc);
+        Entry(config::Config *config, foofs::FooFS *foofs, logger::Logger *logger, 
+            p2pnet::P2Pnet* p2pnet, boost::asio::io_context& ioc);
         ~Entry();
 
         void Run();
@@ -27,6 +29,7 @@ namespace frontend {
     private:
         config::Config *config_ = nullptr;
         foofs::FooFS *foofs_ = nullptr;
+        p2pnet::P2Pnet* p2pnet_ = nullptr;
         logger::Logger *logger_ = nullptr;
 
     private:

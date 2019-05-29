@@ -60,9 +60,6 @@
     <ClCompile Include="entry_session.cpp">
       <Filter>mandis</Filter>
     </ClCompile>
-    <ClCompile Include="..\mandis-p2p\p2pnet_session.cpp">
-      <Filter>mandis-p2p</Filter>
-    </ClCompile>
     <ClCompile Include="..\mandis-p2p\req_session.cpp">
       <Filter>mandis-p2p</Filter>
     </ClCompile>
@@ -109,9 +106,6 @@
     </ClInclude>
     <ClInclude Include="entry_session.h">
       <Filter>mandis</Filter>
-    </ClInclude>
-    <ClInclude Include="..\mandis-p2p\p2pnet_session.h">
-      <Filter>mandis-p2p</Filter>
     </ClInclude>
     <ClInclude Include="..\mandis-p2p\req_session.h">
       <Filter>mandis-p2p</Filter>

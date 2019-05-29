@@ -1,17 +1,13 @@
 #include "../include/p2pnet.h"
 
 namespace p2pnet {
-    P2Pnet::P2Pnet(config::Config *config, logger::Logger *logger, config::callback_fn callback, 
-        boost::asio::io_context& ioc)
+    P2Pnet::P2Pnet(config::Config *config, logger::Logger *logger, boost::asio::io_context& ioc)
         : key_(config->rsa_private_key_path(), config->rsa_public_key_path(), config->rsa_password(), logger),
         config_(config),
         logger_(logger),
-        callback_(callback),
-        ioc_(ioc),
-        acceptor_(ioc_, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), 60002))
+        ioc_(ioc)
     {
-        // run callback demo: (*quote_callback)(CB_QUOTE_FRONT_CONNECTED, nullptr);
-        StartAccept();
+
     }
 
     P2Pnet::~P2Pnet() {
@@ -34,22 +30,8 @@ namespace p2pnet {
 
     }
 
-    void P2Pnet::StartAccept() {
-        session_ptr session(new P2PnetSession(ioc_, logger_));
-        acceptor_.async_accept(session->socket(), boost::bind(&P2Pnet::HandleAccept, this,
-            session, boost::asio::placeholders::error));
-    }
-
-    void P2Pnet::HandleAccept(session_ptr session, const boost::system::error_code& ec) {
-        if (!ec)
-        {
-            session->Start();
-        }
-        StartAccept();
-    }
-
     int P2Pnet::ReqStore(std::string key, std::string block_path) {
-        ReqSession session(ioc_, "127.0.0.1", 60002, logger_);
+        ReqSession session(ioc_, "127.0.0.1", 60001, logger_);
         session.DoReqStore(key, block_path);
         return 0;
     }
@@ -74,29 +56,9 @@ namespace p2pnet {
         return 0;
     }
 
-    int P2Pnet::RspStore(std::string block_path) {
-        return 0;
+    std::string P2Pnet::FindNode(std::string key) {
+        std::string ret_str;
 
+        return ret_str;
     }
-
-    int P2Pnet::RspAccess(std::string key) {
-        return 0;
-
-    }
-
-    int P2Pnet::RspSync(std::string msg) {
-        return 0;
-
-    }
-
-    int P2Pnet::RspFind(std::string key) {
-        return 0;
-
-    }
-
-    int P2Pnet::Pong() {
-        ///not used
-        return 0;
-    }
-
 }

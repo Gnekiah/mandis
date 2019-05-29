@@ -13,6 +13,7 @@ namespace p2pnet {
     {
         LOG_INFO(logger_, "Req Session Init");
         socket_.connect(ep_);
+        //boost::asio::connect(socket_, ep_);
     }
 
     int ReqSession::DoReqStore(std::string key, std::string block_path) {
@@ -30,6 +31,11 @@ namespace p2pnet {
         std::string cmd = "store|" + key + "|" + boost::lexical_cast<std::string>(buffer_length_);
         LOG_TRACE(logger_, "Send Command: " + cmd);
         boost::asio::write(socket_, boost::asio::buffer(cmd.data(), cmd.length()));
+        LOG_TRACE(logger_, "Waiting For Remote");
+        boost::asio::streambuf response;
+        boost::asio::read_until(socket_, response, "\n");
+        LOG_TRACE(logger_, "Receive Back Message");
+
         LOG_TRACE(logger_, "Send Data, Size=" + boost::lexical_cast<std::string>(buffer_length_));
         boost::asio::write(socket_, boost::asio::buffer(buffer_, buffer_length_));
         socket_.close();

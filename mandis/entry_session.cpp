@@ -1,13 +1,17 @@
 #include "entry_session.h"
 #include <sstream>
 #include <boost/lexical_cast.hpp>
+#include <boost/filesystem.hpp>
 
 namespace frontend {
 
-    EntrySession::EntrySession(boost::asio::io_context& ioc, logger::Logger *logger, foofs::FooFS *foofs)
+    EntrySession::EntrySession(boost::asio::io_context& ioc, config::Config* config, 
+        logger::Logger *logger, foofs::FooFS *foofs, p2pnet::P2Pnet* p2pnet)
         : socket_(ioc),
+        config_(config),
         logger_(logger),
-        foofs_(foofs)
+        foofs_(foofs),
+        p2pnet_(p2pnet)
     {
 
     }
@@ -19,7 +23,7 @@ namespace frontend {
     void EntrySession::Start() {
         LOG_TRACE(logger_, "Start Session");
         socket_.async_read_some(boost::asio::buffer(buffer_.data(), 1024 * 512),
-            boost::bind(&EntrySession::HandleRead, shared_from_this(), boost::asio::placeholders::error,
+            boost::bind(&EntrySession::HandleReadForDispatch, shared_from_this(), boost::asio::placeholders::error,
                 boost::asio::placeholders::bytes_transferred));
     }
 
@@ -27,8 +31,16 @@ namespace frontend {
         return socket_;
     }
 
-    void EntrySession::HandleRead(const boost::system::error_code &ec, std::size_t bytes_transferred) {
-        LOG_TRACE(logger_, "Handle Read");
+    /// list|<>|<>
+    /// read|<filename>|<filepath>
+    /// write|<filepath>|<>
+    /// store|<key>|<buffer_size>
+    /// access|<key>
+    /// sync|<msg>
+    /// find|<key>
+    /// ping
+    void EntrySession::HandleReadForDispatch(const boost::system::error_code &ec, std::size_t bytes_transferred) {
+        LOG_TRACE(logger_, "Handle For Dispatch");
         if (ec) {
             LOG_WARNING(logger_, "ecode= " + boost::lexical_cast<std::string>(ec.value()) + ", msg= " + ec.message());
             return;
@@ -36,46 +48,51 @@ namespace frontend {
         
         int ret = 0;
         std::vector<std::string> vec;
+        buffer_.data()[bytes_transferred] = '\0';
         std::string cmdstr = buffer_.data();
+        LOG_TRACE(logger_, "Command=" + cmdstr);
+
         ret = foofs_->Split(vec, cmdstr, '|');
-
-        if (ret != 3) {
-            LOG_WARNING(logger_, "Error On Command Parsing");
-            std::string msg = "Command Error";
-            boost::asio::async_write(socket_, boost::asio::buffer(msg.data(), msg.length()),
-                boost::bind(&EntrySession::HandleWrite, this, boost::asio::placeholders::error));
-            return;
-        }
-
         std::string cmd_ops = vec[0];
-        std::string cmd_filepath = vec[1];
-        std::string cmd_filename = vec[2];
-        std::stringstream ss;
-        ss << "Mandis-cli: ops= " << cmd_ops << ", filepath= " << cmd_filepath << ", filename= " << cmd_filename;
-        LOG_TRACE(logger_, ss);
 
-        std::string msgback;
-        if (cmd_ops == "list") {
+        /// list|<>|<>
+        if (cmd_ops == "list" && ret == 3) {
+            std::string msgback;
             char msg[4096];
+
             ret = foofs_->ReadMetaData(msg);
             if (ret > 0) {
                 msg[ret] = '\0';
                 msgback = msg;
             }
-            else
+            else {
                 msgback = "Failed";
+            }
+            boost::asio::async_write(socket_, boost::asio::buffer(msgback.c_str(), msgback.length()),
+                boost::bind(&EntrySession::HandleCompleted, this, boost::asio::placeholders::error));
         }
-        else if (cmd_ops == "writ") {
+        /// write|<filepath>|<>
+        else if (cmd_ops == "writ" && ret == 3) {
+            std::string msgback;
+            std::string cmd_filepath = vec[1];
+
             ret = foofs_->Write(cmd_filepath);
             if (ret == 0) {
                 LOG_INFO(logger_, "File Wrote: " + cmd_filepath);
                 msgback = "Completed";
             }
             else {
-                msgback = "Failed"; 
+                msgback = "Failed";
             }
+            boost::asio::async_write(socket_, boost::asio::buffer(msgback.c_str(), msgback.length()),
+                boost::bind(&EntrySession::HandleCompleted, this, boost::asio::placeholders::error));
         }
-        else if (cmd_ops == "read") {
+        /// read|<filename>|<filepath>
+        else if (cmd_ops == "read" && ret == 3) {
+            std::string msgback;
+            std::string cmd_filepath = vec[1];
+            std::string cmd_filename = vec[2];
+
             ret = foofs_->ReadByName(cmd_filename, cmd_filepath);
             if (ret == 0) {
                 LOG_INFO(logger_, "File Read: " + cmd_filename);
@@ -84,17 +101,49 @@ namespace frontend {
             else {
                 msgback = "Failed";
             }
-        } 
-        else {
-            LOG_WARNING(logger_, "Error Command");
-            msgback = "Error Command";
+            boost::asio::async_write(socket_, boost::asio::buffer(msgback.c_str(), msgback.length()),
+                boost::bind(&EntrySession::HandleCompleted, this, boost::asio::placeholders::error));
         }
+        /// store|<key>|<buffer_size>
+        else if (cmd_ops == "store" && ret == 3) {
+            LOG_TRACE(logger_, "Rsp Store");
+            buffer_length_ = boost::lexical_cast<int>(vec[2]);
+            boost::asio::write(socket_, boost::asio::buffer("ready for receiving\n"));
 
-        boost::asio::async_write(socket_, boost::asio::buffer(msgback.c_str(), msgback.length()),
-            boost::bind(&EntrySession::HandleWrite, this, boost::asio::placeholders::error));
+            std::string key = vec[1];
+            boost::asio::read(socket_, boost::asio::buffer(buffer_, buffer_length_));
+
+            boost::filesystem::path out_path = boost::filesystem::path(config_->block_path()) / key / "--";
+            std::ofstream fout(out_path.string(), std::ios::binary);
+            fout.write(buffer_.data(), buffer_length_);
+            fout.close();
+            ///TODO!!!!!!!!!!!!!!!!!!!!!!!!!!
+        }
+        /// access|<key>
+        else if (cmd_ops == "access" && ret == 2) {
+            LOG_TRACE(logger_, "Rsp Access");
+            // not used
+        }
+        /// sync|<msg>
+        else if (cmd_ops == "sync" && ret == 2) {
+            LOG_TRACE(logger_, "Rsp Sync");
+        }
+        /// find|<key>
+        else if (cmd_ops == "find" && ret == 2) {
+            LOG_TRACE(logger_, "Rsp Find");
+        }
+        /// ping
+        else if (cmd_ops == "ping") {
+            LOG_TRACE(logger_, "Rsp Ping");
+            // not used
+        }
+        else {
+            LOG_WARNING(logger_, "Command Error, cmd=" + cmdstr);
+            Close();
+        }
     }
 
-    void EntrySession::HandleWrite(const boost::system::error_code &ec) {
+    void EntrySession::HandleCompleted(const boost::system::error_code &ec) {
         if (ec) {
             LOG_WARNING(logger_, "ecode= " + boost::lexical_cast<std::string>(ec.value()) + ", msg= " + ec.message());
             return;
@@ -110,6 +159,5 @@ namespace frontend {
         catch (std::exception &e) {
             LOG_TRACE(logger_, e.what());
         }
-
     }
 }

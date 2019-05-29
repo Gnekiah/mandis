@@ -11,17 +11,15 @@
 #include "../include/hashlib.h"
 #include "../include/logger.h"
 #include "../mandis-p2p/kadbucket.h"
-#include "../mandis-p2p/p2pnet_session.h"
 #include "../mandis-p2p/req_session.h"
 
 namespace p2pnet {
     
-    typedef boost::shared_ptr<P2PnetSession> session_ptr;
     typedef boost::shared_ptr<ReqSession> req_session_ptr;
 
     class P2Pnet {
     public:
-        P2Pnet(config::Config *config, logger::Logger *logger, config::callback_fn callback, boost::asio::io_context& ioc);
+        P2Pnet(config::Config *config, logger::Logger *logger, boost::asio::io_context& ioc);
         ~P2Pnet();
 
         void Run();
@@ -41,12 +39,7 @@ namespace p2pnet {
         int ReqFind(std::string key);
         int Ping(); ///not used
 
-    private:
-        int RspStore(std::string block_path);
-        int RspAccess(std::string key);
-        int RspSync(std::string msg);
-        int RspFind(std::string key);
-        int Pong(); ///not used
+        std::string FindNode(std::string key);
 
     private:
         ssllib::RsaPair key_;
@@ -54,15 +47,9 @@ namespace p2pnet {
         std::map<int, KadBucket*> * bucket_ = nullptr;
         logger::Logger *logger_ = nullptr;
         config::Config *config_ = nullptr;
-        config::callback_fn callback_ = nullptr;
-
-    private:
-        void StartAccept();
-        void HandleAccept(session_ptr session, const boost::system::error_code& ec);
 
     private:
         boost::asio::io_context& ioc_;
-        boost::asio::ip::tcp::acceptor acceptor_;
     };
 }
 

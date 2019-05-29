@@ -98,7 +98,6 @@ libssl.lib
     <ClCompile Include="..\mandis-fs\foofs.cpp" />
     <ClCompile Include="..\mandis-p2p\kadbucket.cpp" />
     <ClCompile Include="..\mandis-p2p\p2pnet.cpp" />
-    <ClCompile Include="..\mandis-p2p\p2pnet_session.cpp" />
     <ClCompile Include="..\mandis-p2p\req_session.cpp" />
     <ClCompile Include="config.cpp" />
     <ClCompile Include="entry_session.cpp" />
@@ -119,7 +118,6 @@ libssl.lib
     <ClInclude Include="..\mandis-fs\block.h" />
     <ClInclude Include="..\mandis-fs\file.h" />
     <ClInclude Include="..\mandis-p2p\kadbucket.h" />
-    <ClInclude Include="..\mandis-p2p\p2pnet_session.h" />
     <ClInclude Include="..\mandis-p2p\req_session.h" />
     <ClInclude Include="entry_session.h" />
   </ItemGroup>
