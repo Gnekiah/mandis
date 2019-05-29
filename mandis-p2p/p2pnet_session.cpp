@@ -1,5 +1,6 @@
 #include "p2pnet_session.h"
 #include <boost/lexical_cast.hpp>
+#include <boost/filesystem.hpp>
 
 namespace p2pnet {
     P2PnetSession::P2PnetSession(boost::asio::io_context& ioc, logger::Logger* logger)
@@ -43,6 +44,14 @@ namespace p2pnet {
         /// ping
         if (ret == 3 && vec[0] == "store") {
             LOG_TRACE(logger_, "Rsp Store");
+            buffer_length_ = boost::lexical_cast<int>(vec[2]);
+            std::string key = vec[1];
+            boost::asio::read(socket_, boost::asio::buffer(buffer_, buffer_length_));
+
+            //boost::filesystem::path out_path = boost::filesystem::path(config_->block_path()) / key / "--";
+            //std::ofstream fout(out_path.string(), std::ios::binary);
+            //fout.write(buffer_.data(), buffer_length_);
+            //fout.close();
             ///TODO!!!!!!!!!!!!!!!!!!!!!!!!!!
         }
         else if (ret == 2 && vec[0] == "access") {

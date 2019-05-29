@@ -22,7 +22,7 @@ namespace p2pnet {
             return -1;
         }
 
-        fin.read(buffer_.data(), 1024 * 512);//////////
+        fin.read(buffer_.data(), 1024 * 512);
         buffer_length_ = fin.gcount();
         fin.close();
 
