@@ -88,8 +88,7 @@ namespace p2pnet {
         return found_buffer;
     }
 
-    int ReqSession::DoPing() {
-        ///not used
+    int ReqSession::DoReqPing() {
         return 0;
     }
 }

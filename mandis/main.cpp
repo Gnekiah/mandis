@@ -1,8 +1,10 @@
 #include <iostream>
 #include <boost/asio/io_context.hpp>
+#include <boost/thread/thread.hpp>
 #include <boost/lexical_cast.hpp>
 #include "../include/logger.h"
 #include "../include/config.h"
+#include "../include/p2pentry.h"
 #include "../include/entry.h"
 #include "../include/foofs.h"
 #include "../include/p2pnet.h"
@@ -32,6 +34,10 @@ int main(int argc, char **argv)
     LOG_TRACE(logger, "=============== Configuration End ===============");
 
     boost::asio::io_context ioc;
+    boost::asio::io_context ioc2;
+
+    auto f = [&]() { ioc2.run(); };
+
     LOG_INFO(logger, "P2Pnet Init...");
     p2pnet::P2Pnet *p2pnet = new p2pnet::P2Pnet(config, logger, ioc);
     p2pnet->Start();
@@ -40,12 +46,18 @@ int main(int argc, char **argv)
     foofs::FooFS *foofs = new foofs::FooFS(config, p2pnet, logger);
     foofs->Start();
 
+    LOG_INFO(logger, "P2P Entry Init...");
+    frontend::P2PEntry* p2pentry = new frontend::P2PEntry(config, foofs, logger, p2pnet, ioc2);
+    p2pentry->Start();
+
     LOG_INFO(logger, "Entry Init...");
     frontend::Entry *entry = new frontend::Entry(config, foofs, logger, p2pnet, ioc);
     entry->Start();
 
     LOG_INFO(logger, "Mandis running...");
+    boost::thread thrd(f);
     ioc.run();
+    thrd.join();
     LOG_INFO(logger, "Mandis stopped!");
 
     entry->Join();

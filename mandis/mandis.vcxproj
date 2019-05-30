@@ -103,6 +103,8 @@ libssl.lib
     <ClCompile Include="entry_session.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="entry.cpp" />
+    <ClCompile Include="p2pentry.cpp" />
+    <ClCompile Include="p2pentry_session.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\config.h" />
@@ -110,6 +112,7 @@ libssl.lib
     <ClInclude Include="..\include\hashlib.h" />
     <ClInclude Include="..\include\logger.h" />
     <ClInclude Include="..\include\magic.h" />
+    <ClInclude Include="..\include\p2pentry.h" />
     <ClInclude Include="..\include\p2pnet.h" />
     <ClInclude Include="..\include\ssllib.h" />
     <ClInclude Include="..\include\entry.h" />
@@ -120,6 +123,7 @@ libssl.lib
     <ClInclude Include="..\mandis-p2p\kadbucket.h" />
     <ClInclude Include="..\mandis-p2p\req_session.h" />
     <ClInclude Include="entry_session.h" />
+    <ClInclude Include="p2pentry_session.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Makefile" />

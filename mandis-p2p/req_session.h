@@ -18,7 +18,7 @@ namespace p2pnet {
         int DoReqAccess(std::string key, std::string block_path);
         int DoReqSync(std::string msg);
         std::string DoReqFind(std::string key);
-        int DoPing();
+        int DoReqPing();
 
     private:
         size_t buffer_length_;
