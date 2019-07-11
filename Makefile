@@ -1,5 +1,5 @@
 CC = g++
-CC_FLAGS = 
+CC_FLAGS = -std=c++11
 
 MANDIS_SRV_TARGET = mandis
 MANDIS_CLI_TARGET = mandis-cli
@@ -27,16 +27,12 @@ export OBJ_LIB OBJ_MANDIS OBJ_MANDIS_FS OBJ_MANDIS_P2P OBJ_MANDIS_CLI
 
 all:
 	@echo "Checking Directory..."
-	$(CHECK_DIR)
-	@echo "Making..."
-	@echo $(SRC_DIR)
-	$(MAKE) -C $(SRC_DIR)
-	$(CC) -o $(BIN_DIR)/$(MANDIS_SRV_TARGET) $(OBJ_LIB) $(OBJ_MANDIS) $(OBJ_MANDIS_FS) $(OBJ_MANDIS_P2P)
-	$(CC) -o $(BIN_DIR)/$(MANDIS_CLI_TARGET) $(OBJ_LIB) $(OBJ_MANDIS_CLI)
-
-CHECK_DIR:
 	mkdir -p $(OBJ_DIR)
 	mkdir -p $(BIN_DIR)
+	@echo "Making..." $(SRC_DIR)
+	$(MAKE) -w -C $(SRC_DIR)
+	$(CC) -o $(BIN_DIR)/$(MANDIS_SRV_TARGET) $(OBJ_LIB) $(OBJ_MANDIS) $(OBJ_MANDIS_FS) $(OBJ_MANDIS_P2P)
+	$(CC) -o $(BIN_DIR)/$(MANDIS_CLI_TARGET) $(OBJ_LIB) $(OBJ_MANDIS_CLI)
 
 .PHONY: clean
 
