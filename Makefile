@@ -29,17 +29,14 @@ all:
 	@echo "Checking Directory..."
 	$(CHECK_DIR)
 	@echo "Making..."
-	$(SRC_DIR)
+	@echo $(SRC_DIR)
+	$(MAKE) -C $(SRC_DIR)
 	$(CC) -o $(BIN_DIR)/$(MANDIS_SRV_TARGET) $(OBJ_LIB) $(OBJ_MANDIS) $(OBJ_MANDIS_FS) $(OBJ_MANDIS_P2P)
 	$(CC) -o $(BIN_DIR)/$(MANDIS_CLI_TARGET) $(OBJ_LIB) $(OBJ_MANDIS_CLI)
 
 CHECK_DIR:
 	mkdir -p $(OBJ_DIR)
 	mkdir -p $(BIN_DIR)
-
-$(SRC_DIR):
-	@echo $@
-	$(MAKE) -C $@
 
 .PHONY: clean
 
