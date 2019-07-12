@@ -8,7 +8,7 @@ namespace config {
     Config::Config(std::string &config_filepath) 
         : config_filepath_(config_filepath)
     {
-        std::ifstream fin(config_filepath);
+        std::ifstream fin(config_filepath.c_str());
         if (!fin) {
             std::cerr << "Config File Not Found, Do GenConfig()" << std::endl;
             GenConfig();
