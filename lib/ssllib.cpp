@@ -103,7 +103,7 @@ namespace ssllib {
         boost::filesystem::path pubpath(pub_path);
         if (!boost::filesystem::exists(pubpath)) {
             LOG_WARNING(logger_, "File not found!");
-            throw std::exception("File not found!");
+            throw std::exception();
             return;
         }
         BIO * pub_bio = BIO_new_file(pub_path.c_str(), "r");
@@ -111,7 +111,7 @@ namespace ssllib {
         LOG_TRACE(logger_, "Load public key from file!");
         if (!PEM_read_bio_RSAPublicKey(pub_bio, &public_key_, NULL, NULL)) {
             LOG_WARNING(logger_, "Failed to load public key!");
-            throw std::exception("Failed to load public key!");
+            throw std::exception();
         }
         BIO_free(pub_bio);
     }
