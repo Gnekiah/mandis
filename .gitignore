@@ -263,3 +263,4 @@ __pycache__/
 block-path/
 block-info
 file-info
+*.o
