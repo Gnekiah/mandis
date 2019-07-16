@@ -10,14 +10,17 @@ namespace ssllib {
         : private_key_path_(priv_path), public_key_path_(pub_path), password_(password),
         logger_(logger), rsa_key_length_(rsa_key_len) 
     {
+#ifdef __linux__
+        return;
+#endif
+
         boost::filesystem::path privpath(priv_path);
         boost::filesystem::path pubpath(pub_path);
-        std::cerr << "1" << std::endl;
+
         /* Load keypair from files. */
         if (boost::filesystem::exists(privpath) && boost::filesystem::exists(pubpath)) {
             BIO * priv_bio = BIO_new_file(priv_path.c_str(), "r");
             BIO * pub_bio = BIO_new_file(pub_path.c_str(), "r");
-            std::cerr << "2" << std::endl;
             LOG_INFO(logger_, "Load keypair from files!");
             if (!PEM_read_bio_RSAPrivateKey(priv_bio, &private_key_, NULL, NULL)) {
                 LOG_ERROR(logger_, "Failed to read rsa private key!");
@@ -27,7 +30,7 @@ namespace ssllib {
                 LOG_ERROR(logger_, "Failed to read rsa public key!");
                 ExitFlag = true;
             }
-            std::cerr << "3" << std::endl;
+
             BIO_free(priv_bio);
             BIO_free(pub_bio);
             return;
@@ -37,7 +40,7 @@ namespace ssllib {
             ExitFlag = true;
             return;
         }
-        std::cerr << "4" << std::endl;
+
         /* Generate keypair. */
         LOG_INFO(logger_, "Generate keypair!");
         RSA * rsa = RSA_generate_key(rsa_key_len, RSA_F4, NULL, NULL);
@@ -46,7 +49,7 @@ namespace ssllib {
             ExitFlag = true;
             return;
         }
-        std::cerr << "5" << std::endl;
+
         BIO * priv_bio = BIO_new_file(priv_path.c_str(), "w");
         BIO * pub_bio = BIO_new_file(pub_path.c_str(), "w");
         if (PEM_write_bio_RSAPrivateKey(priv_bio, rsa, NULL, NULL, 0, NULL, NULL) <= 0) {
@@ -57,12 +60,11 @@ namespace ssllib {
             LOG_ERROR(logger_, "Failed to write public keys!");
             ExitFlag = true;
         }
-        std::cerr << "6" << std::endl;
+
         BIO_free(priv_bio);
         BIO_free(pub_bio);
         private_key_ = RSAPrivateKey_dup(rsa);
         public_key_ = RSAPublicKey_dup(rsa);
-        std::cerr << "7" << std::endl;
     }
 
     RsaPair::~RsaPair() {
