@@ -1,7 +1,15 @@
 #include "../include/config.h"
 #include <iostream>
 #include <fstream>
+
+#ifdef _WIN32
 #include <boost/filesystem.hpp>
+#elif __linux__
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
+#endif 
+
 using boost::property_tree::ini_parser::read_ini;
 
 namespace config {
@@ -47,9 +55,16 @@ namespace config {
         rsa_private_key_path_ = pt_.get<std::string>("MandisP2P.RSAPrivateKeyPath", "");
             std::cerr << "13" << std::endl;
 
+#ifdef _WIN32
         if (!boost::filesystem::exists(block_path()) || !boost::filesystem::is_directory(block_path()))
             boost::filesystem::create_directories(block_path());
-            std::cerr << "14" << std::endl;
+#elif __linux__
+        struct stat st = { 0 };
+        if (stat(block_path().c_str(), &st) == -1) {
+            mkdir(block_path().c_str(), 0755);
+        }
+#endif
+        std::cerr << "14" << std::endl;
     }
 
     Config::~Config() {
